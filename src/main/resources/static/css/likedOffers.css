@@ -1,0 +1,83 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway',sans-serif;
+    color: white;
+}
+.banner{
+height: 100vh;
+width: 100%;
+background-position: center;
+background-size: cover;
+background-attachment: fixed;
+background-repeat: no-repeat;
+}
+
+.banner .navbar{
+    margin-top: 3%;
+}
+
+
+.navbar-brand{
+    color: black;
+    font-size: 2.8em;
+    font-weight: 400;
+    margin-left: 10%;
+}
+
+
+.banner.nav{
+    margin-right: 10%;
+}
+
+.banner .nav li a{
+    color: black;
+    font-size: 1.5em;
+}
+
+.banner.nav-item{
+    color: #aaa;
+    font-size: 1.2em;
+}
+
+.banner .info{
+    margin-top: 15%;
+    transform: translateY(-15%);
+}
+
+.banner .info h1{
+    font-size: 2.5em;
+    font-weight: 400;
+    color: black;
+    letter-spacing: 2px;
+}
+
+.banner .info p{
+    font-size: 2em;
+    font-weight: 500;
+    color: white;
+    letter-spacing: 2px;
+}
+
+.banner .info a{
+    margin-left: 43%;
+    transform: translateX(50%);
+    color:gray;
+    background: white;
+}
+
+#header {
+    background: url(https://images.unsplash.com/photo-1415795854641-f4a487a0fdc8?ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80) center center / cover no-repeat ;
+  }
+
+  .card{
+    color: black;
+  }
+
+  .btn-outline-danger {
+    @apply text-red-600 rounded-md border border-red-600 hover:bg-red-500 hover:text-white;
+  }
+
+  h1{
+    color: black;
+  }

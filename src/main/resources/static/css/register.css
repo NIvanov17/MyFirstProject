@@ -1,0 +1,73 @@
+.banner .navbar {
+    margin-top: 3%;
+}
+
+.navbar-brand {
+    color: black;
+    font-size: 2.8em;
+    font-weight: 400;
+    margin-left: 10%;
+}
+
+
+.banner.nav {
+    margin-right: 10%;
+}
+.banner .nav li a {
+    color: black;
+    font-size: 1.7em;
+}
+
+.banner.nav-item {
+    color: #aaa;
+    font-size: 1.2em;
+}
+
+.banner .info {
+    margin-top: 15%;
+    transform: translateY(-15%);
+}
+
+body {
+    height: 100vh;
+    width: 100%;
+    background: url('../img/register.jpg');
+    background-position: center;
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+}
+
+.img {
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+}
+
+.btn1 {
+    border: none;
+    outline: none;
+    height: 50px;
+    width: 100%;
+    background-color: black;
+    color: white;
+    border-radius: 4px;
+    font-weight: bold;
+}
+
+.btn1:hover {
+    background-color: white;
+    border: 1px, solid;
+    color: black;
+}
+
+p {
+    color: white;
+}
+
+h1{
+    color: white;
+}
+
+h4{
+    color: white;
+}
