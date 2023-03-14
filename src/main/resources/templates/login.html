@@ -1,6 +1,6 @@
-<!-- От документацията линка за bootstrap-->
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
 <head>
     <meta charset="utf-8">
@@ -14,41 +14,9 @@
 
 <body>
 
-    <div class="container-fluid banner">
-        <div class="row">
-            <div class="col-md-12">
-                <nav class="navbar navbar-md">
-                    <a class="navbar-brand" href="/">Bri4ka</a>
+<body>  <header th:replace="fragments/commons::nav"></header>
 
-                    <ul class="nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">HOME</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">ADD OFFER</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">OFEERS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">ABOUT US</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">LIKED OFFERS</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">LOG IN</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">REGISTER</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">LOG OUT</a>
-                        </li>
-                    </ul>
-                </nav>
-            </div>
-        </div>
+
 
 
         <section class="Form my-2 mx-5">
@@ -89,6 +57,9 @@
             </div>
 
     </section>
+
+<footer th:replace="fragments/commons::footer"></footer>
+
 
     <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 

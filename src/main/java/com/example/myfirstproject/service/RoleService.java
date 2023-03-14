@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class RoleService {
@@ -27,5 +28,9 @@ public class RoleService {
                 this.roleRepository.saveAndFlush(currentRole);
             });
         }
+    }
+
+    public UserRoleEntity findRoleByName(UserRoleEnum admin) {
+        return roleRepository.findRoleByName(UserRoleEnum.ADMIN);
     }
 }

@@ -16,13 +16,12 @@ public class UserRoleEntity {
 
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
-    private UserRoleEnum role;
+    private UserRoleEnum name;
 
-    @ManyToMany(mappedBy = "roles")
-    private List<UserEntity> users;
+
 
     public UserRoleEntity() {
-        this.users = new ArrayList<>();
+
     }
 
     public long getId() {
@@ -34,11 +33,11 @@ public class UserRoleEntity {
     }
 
     public UserRoleEnum getRole() {
-        return role;
+        return name;
     }
 
-    public void setRole(UserRoleEnum role) {
-        this.role = role;
+    public void setRole(UserRoleEnum name) {
+        this.name = name;
     }
 
 

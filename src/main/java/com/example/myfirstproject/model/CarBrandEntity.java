@@ -16,7 +16,7 @@ public class CarBrandEntity {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany
+    @OneToMany(mappedBy = "brand")
     private List<CarModelEntity> models;
 
     public CarBrandEntity() {
