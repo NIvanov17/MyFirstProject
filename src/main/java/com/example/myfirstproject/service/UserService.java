@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService {
@@ -26,7 +27,7 @@ public class UserService {
         if (userRepository.count() == 0) {
             UserEntity adminUser = new UserEntity();
 
-            UserRoleEntity userRoleEntity = roleService.findRoleByName(UserRoleEnum.ADMIN);
+            UserRoleEntity userRoleEntity = roleService.findAdminRoleByName(UserRoleEnum.ADMIN);
 
             List<UserRoleEntity> role = new ArrayList<>();
             role.add(userRoleEntity);
@@ -42,5 +43,22 @@ public class UserService {
             this.userRepository.saveAndFlush(adminUser);
         }
 
+    }
+
+
+    public Optional<UserEntity> getByUsername(String username) {
+        return this.userRepository.findByUsername(username);
+    }
+
+    public Optional<UserEntity> getByEmail(String email) {
+        return this.userRepository.findByEmail(email);
+    }
+
+    public void register(UserEntity user) {
+
+        UserRoleEntity roleByName = this.roleService.findUserRoleByName(UserRoleEnum.USER);
+        user.setRoles(List.of(roleByName));
+
+        this.userRepository.save(user);
     }
 }

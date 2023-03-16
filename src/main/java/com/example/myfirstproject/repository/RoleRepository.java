@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface RoleRepository extends JpaRepository<UserRoleEntity, Long> {
-    UserRoleEntity findRoleByName(UserRoleEnum admin);
+    UserRoleEntity findRoleByName(UserRoleEnum role);
 }

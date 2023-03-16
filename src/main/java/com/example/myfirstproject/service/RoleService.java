@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.Arrays;
-import java.util.List;
 
 @Service
 public class RoleService {
@@ -30,7 +29,11 @@ public class RoleService {
         }
     }
 
-    public UserRoleEntity findRoleByName(UserRoleEnum admin) {
+    public UserRoleEntity findAdminRoleByName(UserRoleEnum admin) {
         return roleRepository.findRoleByName(UserRoleEnum.ADMIN);
+    }
+
+    public UserRoleEntity findUserRoleByName(UserRoleEnum user){
+        return roleRepository.findRoleByName(UserRoleEnum.USER);
     }
 }
