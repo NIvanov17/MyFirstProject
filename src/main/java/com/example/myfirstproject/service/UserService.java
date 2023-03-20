@@ -4,6 +4,7 @@ import com.example.myfirstproject.model.UserEntity;
 import com.example.myfirstproject.model.UserRoleEntity;
 import com.example.myfirstproject.model.enums.UserRoleEnum;
 import com.example.myfirstproject.repository.UserRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,11 +17,13 @@ public class UserService {
     private final UserRepository userRepository;
 
     private final RoleService roleService;
+    private final PasswordEncoder passwordEncoder;
 
 
-    public UserService(UserRepository userRepository, RoleService roleService) {
+    public UserService(UserRepository userRepository, RoleService roleService, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.roleService = roleService;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public void initFirstUser() {
@@ -29,18 +32,19 @@ public class UserService {
 
             UserRoleEntity userRoleEntity = roleService.findAdminRoleByName(UserRoleEnum.ADMIN);
 
-            List<UserRoleEntity> role = new ArrayList<>();
-            role.add(userRoleEntity);
+            List<UserRoleEntity> roles = new ArrayList<>();
+            roles.add(userRoleEntity);
 
-            adminUser.setUsername("Bari10");
-            adminUser.setFirstName("Bari");
-            adminUser.setLastName("Papazov");
-            adminUser.setEmail("bari_papazov@gmail.com");
-            adminUser.setPassword("1234");
+            adminUser.setUsername("Kalin4");
+            adminUser.setFirstName("Kalin");
+            adminUser.setLastName("Krumov");
+            adminUser.setEmail("kalin_krumov@gmail.com");
+            adminUser.setPassword(passwordEncoder.encode("1234"));
             adminUser.setTelephoneNumber("0896464970");
-            adminUser.setRoles(role);
+            adminUser.setRoles(roles);
+            adminUser.setActive(true);
 
-            this.userRepository.saveAndFlush(adminUser);
+            this.userRepository.save(adminUser);
         }
 
     }

@@ -1,8 +1,6 @@
 package com.example.myfirstproject.service;
 
-import com.example.myfirstproject.model.OfferEntity;
-import com.example.myfirstproject.model.enums.EngineEnum;
-import com.example.myfirstproject.model.enums.TransmissionEnum;
+
 import com.example.myfirstproject.repository.OfferRepository;
 import org.springframework.stereotype.Service;
 

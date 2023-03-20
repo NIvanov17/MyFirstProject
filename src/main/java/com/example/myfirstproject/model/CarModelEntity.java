@@ -1,6 +1,9 @@
 package com.example.myfirstproject.model;
 
+
 import jakarta.persistence.*;
+
+
 
 @Entity
 @Table(name = "models")

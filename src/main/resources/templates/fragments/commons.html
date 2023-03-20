@@ -2,19 +2,35 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
-<head th:fragment="head">
+<head>
 
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bri4ka</title>
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/index.css"/>
-
+    <th:block th:fragment="head">
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="_csrf" th:content="${_csrf.token}"/>
+        <meta name="_csrf_header" th:content="${_csrf.headerName}"/>
+        <title>Bri4ka</title>
+        <link rel="stylesheet" href="/css/bootstrap.min.css">
+        <link rel="stylesheet" href="/css/reset-css.css">
+        <link rel="stylesheet" type="text/css" href="/css/index.css"/>
+<!--    <div th:fragment="head">-->
+<!--        <meta charset="UTF-8">-->
+<!--        <meta http-equiv="X-UA-Compatible" content="IE=edge">-->
+<!--        <meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+<!--        <meta name="_csrf" th:content="${_csrf.token}"/>-->
+<!--        <meta name="_csrf_header" th:content="${_csrf.headerName}"/>-->
+<!--        <title>Bri4ka</title>-->
+<!--        <link rel="stylesheet" href="/css/bootstrap.min.css">-->
+<!--        <link rel="stylesheet" href="/css/reset-css.css">-->
+<!--        <link rel="stylesheet" type="text/css" href="/css/index.css"/>-->
+<!--    </div>-->
+    </th:block>
 </head>
 
-<body th:fragment="nav">
+<body>
 
+<th:block th:fragment="nav">
 <div class="container-fluid banner">
     <div class="row">
         <div class="col-md-12">
@@ -44,22 +60,51 @@
                         <a class="nav-link" href="/register">REGISTER</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">LOG OUT</a>
+
+<!--                        <form th:action="/logout" method="POST">-->
+<!--                            <button type="submit" class="btn1 mt-3 mb-4">LOG OUT</button>-->
+<!--                        </form>-->
+                        <a class="nav-link" href="/logout">LOG OUT</a>
                     </li>
                 </ul>
             </nav>
         </div>
 
+</th:block>
 
+<th:block th:fragment="footer">
 
-            <footer class="footer bg-transparent  py-2">
-                <div class="container-fluid text-center">
-                    <div class="footer-background h5  fixed-bottom">
-                        &copy; SoftUni Student 2022. All rights reserved.
-                    </div>
-                </div>
-            </footer>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <footer class="footer bg-transparent  py-2">
+        <div class="container-fluid text-center">
+            <div class="footer-background h5 text-dark fixed-bottom">
+                &copy; SoftUni Student 2022. All rights reserved.
+            </div>
+        </div>
+    </footer>
+</th:block>
 
+<!--        <th:block th:fragmet="footer">-->
+<!--            <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"-->
+<!--                    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"-->
+<!--                    crossorigin="anonymous"></script>-->
+<!--            <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"-->
+<!--                    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"-->
+<!--                    crossorigin="anonymous"></script>-->
+<!--            <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"-->
+<!--                    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"-->
+<!--                    crossorigin="anonymous"></script>-->
+<!--            -->
+<!--            <footer class="footer bg-transparent  py-2">-->
+<!--                <div class="container-fluid text-center">-->
+<!--                    <div class="footer-background h5  fixed-bottom">-->
+<!--                        &copy; SoftUni Student 2022. All rights reserved.-->
+<!--                    </div>-->
+<!--                </div>-->
+<!--            </footer>-->
+<!--        </th:block>-->
 
 </body>
 </html>

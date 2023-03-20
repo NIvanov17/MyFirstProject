@@ -1,6 +1,9 @@
 package com.example.myfirstproject.model;
 
+
+
 import jakarta.persistence.*;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -26,6 +29,16 @@ public class UserEntity {
 
     @Column(nullable = false)
     private String password;
+
+    private boolean isActive;
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
 
     @Column(name = "telephone-number", nullable = false)
     private String telephoneNumber;

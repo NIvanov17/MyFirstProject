@@ -2,12 +2,12 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="fragments/commons::head"></th:block>
+
     <title>About Us</title>
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/about.css" />
+    <th:block th:replace="fragments/commons::head"></th:block>
+
+    <link rel="stylesheet" type="text/css" href="../css/about.css" />
 </head>
 <body>
 <header th:replace="fragments/commons::nav"></header>
@@ -28,7 +28,7 @@
 
 <footer th:replace="fragments/commons::footer"></footer>
 
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 
 </body>
 </html>

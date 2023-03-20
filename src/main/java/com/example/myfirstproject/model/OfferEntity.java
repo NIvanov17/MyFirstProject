@@ -4,6 +4,8 @@ import com.example.myfirstproject.model.enums.EngineEnum;
 import com.example.myfirstproject.model.enums.TransmissionEnum;
 import jakarta.persistence.*;
 
+
+
 import java.math.BigDecimal;
 
 @Entity

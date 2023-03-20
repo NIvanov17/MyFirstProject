@@ -3,8 +3,6 @@ package com.example.myfirstproject.model;
 import com.example.myfirstproject.model.enums.UserRoleEnum;
 import jakarta.persistence.*;
 
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 @Table(name = "user_roles")

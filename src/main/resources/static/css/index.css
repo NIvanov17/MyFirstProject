@@ -5,15 +5,15 @@ body{
     font-family: 'Raleway',sans-serif;
     color: white;
 }
-.banner{
-height: 100vh;
-width: 100%;
-background:url('../img/banner.jpg');
-background-position: center;
-background-size: cover;
-background-attachment: fixed;
-background-repeat: no-repeat;
-}
+/*.banner{*/
+/*height: 100vh;*/
+/*width: 100%;*/
+/*background:url('../../../../img/banner.jpg');*/
+/*background-position: center;*/
+/*background-size: cover;*/
+/*background-attachment: fixed;*/
+/*background-repeat: no-repeat;*/
+/*}*/
 
 .banner .navbar{
     margin-top: 3%;

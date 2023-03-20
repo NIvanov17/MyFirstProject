@@ -2,9 +2,23 @@
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org">
 
-<head th:replace="fragments/commons::head"></head>
+<head>
+    <th:block th:replace="fragments/commons::head"></th:block>
+    <style>
+        .banner {
+            height: 100vh;
+            width: 100%;
+            background: url('/img/banner.jpg');
+            background-position: center;
+            background-size: cover;
+            background-attachment: fixed;
+            background-repeat: no-repeat;
+        }
+    </style>
+</head>
 
-<body>  <header th:replace="fragments/commons::nav"></header>
+<body>
+<header th:replace="fragments/commons::nav"></header>
 <div class="col-md-8 offset-md-2 my-8 info">
     <h1 class="text-center">Bri4ka</h1>
     <p class="text-center">
@@ -16,10 +30,10 @@
 </div>
 
 
-    <footer th:replace="fragments/commons::footer"></footer>
+<footer th:replace="fragments/commons::footer"></footer>
 
 
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+<script src="../static/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 </body>
 
 </html>

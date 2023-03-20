@@ -3,13 +3,11 @@
       xmlns:th="http://www.thymeleaf.org">
 
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <th:block th:replace="fragments/commons::head"></th:block>
+
     <title>AllOffers</title>
 
-    <link rel="stylesheet" href="/node_modules/bootstrap/dist/css/bootstrap.css">
-    <link rel="stylesheet" href="/css/offers.css" />
+    <link rel="stylesheet" type="text/css" href="../css/offers.css" />
 </head>
 
 <body>
@@ -49,7 +47,7 @@
 
 <footer th:replace="fragments/commons::footer">
 
-    <script src="/node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
 </body>
 
 </html>

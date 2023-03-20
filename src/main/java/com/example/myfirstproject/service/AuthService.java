@@ -4,6 +4,7 @@ package com.example.myfirstproject.service;
 import com.example.myfirstproject.model.DTOs.UserRegisterDTO;
 import com.example.myfirstproject.model.UserEntity;
 import org.modelmapper.ModelMapper;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,10 +16,13 @@ public class AuthService {
 
     private final ModelMapper modelMapper;
 
-    public AuthService(UserService userService, ModelMapper modelMapper) {
+    private final PasswordEncoder passwordEncoder;
+
+    public AuthService(UserService userService, ModelMapper modelMapper, PasswordEncoder passwordEncoder) {
         this.userService = userService;
 
         this.modelMapper = modelMapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public boolean register(UserRegisterDTO userRegisterDTO) {
@@ -37,6 +41,7 @@ public class AuthService {
         }
 
         UserEntity user = this.modelMapper.map(userRegisterDTO, UserEntity.class);
+        user.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
         this.userService.register(user);
 
         return true;
