@@ -23,99 +23,125 @@
             <div class="col-lg-5 px-5 pt-5">
                 <h1 class="font-weight-bold py-5">Register</h1>
 
-<!--                <form th:method="POST" th:action="@{/register}" th:object="${userRegisterDTO}"-->
-<!--                      class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">-->
+<!--                <form  th:action="@{/register}"-->
+<!--                       th:method="POST"-->
+<!--                       th:object="${userRegisterDTO}"-->
+<!--                       class="main-form mx-auto col-md-8 d-flex flex-column justify-content-center">-->
 <!--                    <div class="row">-->
 <!--                        <div class="form-group col-md-6 mb-3">-->
 <!--                            <label for="firstName" class="text-white font-weight-bold">First Name</label>-->
-<!--                            <input id="firstName" th:field="*{firstName}" th:errorclass="is-invalid" name="firstName" type="text"-->
-<!--                                   class="form-control" placeholder="First name" />-->
+<!--                            <input-->
+<!--                                    id="firstName"-->
+<!--                                    th:field="*{firstName}"-->
+<!--                                    th:errorclass="is-invalid"-->
+<!--                                    type="text"-->
+<!--                                    class="form-control"-->
+<!--                                    placeholder="First name"/>-->
 <!--                            <p class="invalid-feedback errors alert alert-danger">-->
-<!--                                First name is required and should be at least 2 symbols.-->
+<!--                                First name is required and should be at least 2.-->
+
 <!--                            </p>-->
 <!--                        </div>-->
 <!--                        <div class="form-group col-md-6 mb-3">-->
 <!--                            <label for="lastName" class="text-white font-weight-bold">Last Name</label>-->
-<!--                            <input id="lastName" th:field="*{lastName}" th:errorclass="is-invalid" name="lastName" type="text"-->
-<!--                                   class="form-control" placeholder="Last name" />-->
+<!--                            <input id="lastName"-->
+<!--                                   th:field="*{lastName}"-->
+<!--                                   th:errorclass="is-invalid"-->
+<!--                                   type="text"-->
+<!--                                   class="form-control"-->
+<!--                                   placeholder="Last name"/>-->
 <!--                            <p class="invalid-feedback errors alert alert-danger">-->
-<!--                                Last name is required and should be at least 2 symbols.-->
+<!--                                Last name is required and should be at least 2.-->
+
 <!--                            </p>-->
 <!--                        </div>-->
 <!--                    </div>-->
-
 <!--                    <div class="form-group col-md-6 mb-3">-->
-<!--                        <label for="username" class="text-white font-weight-bold">Username</label>-->
-<!--                        <input id="username" th:field="*{username}" th:errorclass="is-invalid" name="username" type="text"-->
-<!--                               class="form-control" placeholder="Username" />-->
+<!--                        <label for="lastName" class="text-white font-weight-bold">Username</label>-->
+<!--                        <input id="username"-->
+<!--                               th:field="*{username}"-->
+<!--                               th:errorclass="is-invalid"-->
+<!--                               type="text"-->
+<!--                               class="form-control"-->
+<!--                               placeholder="Username"/>-->
 <!--                        <p class="invalid-feedback errors alert alert-danger">-->
-<!--                            Username is required and should be at least 2 symbols.-->
+<!--                            Username is required and should be between at least 2 symbols.-->
 <!--                        </p>-->
 <!--                    </div>-->
 <!--            </div>-->
+<!--                    <div class="row">-->
+<!--                        <div class="form-group col-md-6 mb-3">-->
+<!--                            <label for="email" class="text-white font-weight-bold">Email</label>-->
+<!--                            <input id="email"-->
+<!--                                   th:field="*{email}"-->
+<!--                                   th:errorclass="is-invalid"-->
+<!--                                   type="text"-->
+<!--                                   class="form-control"-->
+<!--                                   placeholder="Email"/>-->
+<!--                            <div class="invalid-feedback errors alert alert-danger">-->
+<!--                                <div-->
+<!--                                        th:each="err : ${#fields.errors('email')}"-->
+<!--                                        th:text="${err}"-->
+<!--                                />-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="form-group col-md-6 mb-3">-->
+<!--                            <label for="password" class="text-white font-weight-bold">Password</label>-->
+<!--                            <input id="password"-->
+<!--                                   th:field="*{password}"-->
+<!--                                   th:errorclass="is-invalid"-->
+<!--                                   type="password"-->
+<!--                                   class="form-control"-->
+<!--                                   placeholder="Password"/>-->
+<!--                            <p class="invalid-feedback errors alert alert-danger">-->
+<!--                                Password is required and should be at least 3 symbols.-->
+<!--                            </p>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                    <div class="form-group">-->
+<!--                        <label for="confirmPassword" class="text-white font-weight-bold">Repeat Password</label>-->
+<!--                        <input-->
+<!--                                id="confirmPassword"-->
+<!--                                th:field="*{confirmPassword}"-->
+<!--                                th:errorclass="is-invalid"-->
+<!--                                type="password"-->
+<!--                                class="form-control"-->
+<!--                                placeholder="Repeat password"-->
+<!--                        />-->
+<!--                        <p class="invalid-feedback errors alert alert-danger">-->
+<!--                            Passwords should match.-->
+<!--                        </p>-->
+<!--                    </div>-->
 
-
-<!--            <div class="row">-->
-<!--                <div class="form-group col-md-6 mb-3">-->
-<!--                    <label for="email" class="text-white font-weight-bold">Email</label>-->
-<!--                    <input id="email" th:field="*{email}" th:errorclass="is-invalid"  type="text"-->
-<!--                           class="form-control" placeholder="Email" />-->
-<!--                    <p class="invalid-feedback errors alert alert-danger">-->
-<!--                        Email is required and should be unique.-->
-<!--                    </p>-->
-<!--&lt;!&ndash;                    <div class="invalid-feedback errors alert alert-danger">&ndash;&gt;-->
-<!--&lt;!&ndash;                        <div th:each="err : ${#fields.errors('email')}" th:text="${err}" />&ndash;&gt;-->
-<!--&lt;!&ndash;                    </div>&ndash;&gt;-->
-<!--                </div>-->
-
-<!--                <div class="form-group col-md-6 mb-3">-->
-<!--                    <label for="password" class="text-white font-weight-bold">Password</label>-->
-<!--                    <input id="password"-->
-<!--                           th:field="*{password}"-->
-<!--                           th:errorclass="is-invalid"-->
-<!--                           type="password"-->
-<!--                           name="password"-->
-<!--                           class="form-control"-->
-<!--                           placeholder="Password" />-->
-<!--                    <p class="invalid-feedback errors alert alert-danger">-->
-<!--                        Password is required and should be at least 5 symbols.-->
-<!--                    </p>-->
-<!--                </div>-->
-<!--            </div>-->
-<!--            <div class="form-group">-->
-<!--                <label for="confirmPassword" class="text-white font-weight-bold">Repeat Password</label>-->
-<!--                <input id="confirmPassword"-->
-<!--                       th:field="*{confirmPassword}"-->
-<!--                       th:errorclass="is-invalid"-->
-<!--                       type="password"-->
-<!--                       name="confirmPassword"-->
-<!--                       class="form-control"-->
-<!--                       placeholder="Repeat password" />-->
-<!--                <p class="invalid-feedback errors alert alert-danger">-->
-<!--                    Passwords should match.-->
-<!--                </p>-->
-<!--            </div>-->
-
-<!--            <div class="form-group col-md-6 mb-3">-->
-<!--                <label for="telephoneNumber" class="text-white font-weight-bold">Telephone Number</label>-->
-<!--                <input id="telephoneNumber"-->
-<!--                        type="telephoneNumber"-->
-<!--                       th:field="*{telephoneNumber}"-->
-<!--                       th:errorclass="is-invalid"-->
-<!--                       name="telephoneNumber"-->
-<!--                       placeholder="Telephone Number"-->
-<!--                       class="form-control my-3 p-2"/>-->
-<!--                <p class="invalid-feedback errors alert alert-danger">-->
-<!--                    Telephone Number is required.-->
-<!--                </p>-->
-<!--            </div>-->
 
 <!--            <div class="for-row">-->
-<!--                <div class="col col-md-4">-->
-<!--                    <button type="submit" class="btn1 mt-3 mb-4">Register</button>-->
+<!--                <div class="col-lg-7">-->
+<!--                    <label class="text-white font-weight-bold">Telephone Number</label>-->
+<!--                    <input type="telephoneNumber"-->
+<!--                           th:field="*{telephoneNumber}"-->
+<!--                           th:errorclass="is-invalid"-->
+<!--                           name="telephoneNumber"-->
+<!--                           placeholder="Telephone Number"-->
+<!--                           class="form-control my-3 p-2"/>-->
+<!--                    <p class="invalid-feedback errors alert alert-danger">-->
+<!--                        Telephone Number is required.-->
+<!--                    </p>-->
 <!--                </div>-->
 <!--            </div>-->
-<!--            </form>-->
+
+<!--                    <div class="row">-->
+<!--                        <div class="col col-md-4">-->
+<!--                            <div class="button-holder d-flex">-->
+<!--                                <input type="submit" class="btn btn-info btn-lg" value="Register"/>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                    </div>-->
+<!--                </form>-->
+
+
+
+
+
 
 
                 <form class="mx-auto"
@@ -123,7 +149,7 @@
                         th:action="@{/register}"
                         th:object="${userRegisterDTO}">
                     <div class="for-row">
-                        <div class="col-lg-7">
+                        <div class="form-group col-md-6 mb-3">
                             <label class="text-white font-weight-bold">First Name</label>
                             <input id="firstName"
                                    type="text"
