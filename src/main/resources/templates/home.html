@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 <head>
     <th:block th:replace="fragments/commons::head"></th:block>
     <title>Home</title>
@@ -13,7 +14,7 @@
 <body>
 <header th:replace="fragments/commons::nav"></header>
             <div class="col-md-8 offset-md-2 my-8 info text-black">
-                <h1 class="text-center">Welcome, </h1>
+                <h1 class="text-center">Welcome,</h1>
 
                 <h2 class="text-center text-dark font-weight-bold">User!</h2>
             </div>

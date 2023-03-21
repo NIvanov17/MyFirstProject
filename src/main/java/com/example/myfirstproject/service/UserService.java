@@ -42,7 +42,7 @@ public class UserService {
             adminUser.setPassword(passwordEncoder.encode("1234"));
             adminUser.setTelephoneNumber("0896464970");
             adminUser.setRoles(roles);
-            adminUser.setActive(true);
+//            adminUser.setActive(true);
 
             this.userRepository.save(adminUser);
         }

@@ -2,7 +2,7 @@ package com.example.myfirstproject.service;
 
 import com.example.myfirstproject.model.UserEntity;
 import com.example.myfirstproject.model.UserRoleEntity;
-import com.example.myfirstproject.model.entity.Bri4kaUserDetails;
+import com.example.myfirstproject.model.entities.Bri4kaUserDetails;
 import com.example.myfirstproject.repository.UserRepository;
 
 import jakarta.transaction.Transactional;
@@ -12,11 +12,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 
 public class ApplicationUserDetailsService implements UserDetailsService {
@@ -43,8 +41,7 @@ public class ApplicationUserDetailsService implements UserDetailsService {
                 userEntity.getUsername(),
                 userEntity.getFirstName(),
                 userEntity.getLastName(),
-                userEntity.getRoles().stream().map(this::mapRole).toList(),
-                userEntity.isActive()
+                userEntity.getRoles().stream().map(this::mapRole).toList()
 
         ) {
         };

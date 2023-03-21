@@ -17,7 +17,7 @@
 
 
 <form th:action="@{/login}" th:method="POST"
-      class="main-form mx-auto col-md-3 d-flex flex-column justify-content-center">
+      class="main-form mx-auto col-md-3 my-5 d-flex flex-column justify-content-center">
     <div class="form-group">
         <label for="username" class="text-white font-weight-bold">Username</label>
         <input id="username" th:value="${username}" name="username" type="text"
@@ -41,52 +41,12 @@
         </div>
 
 
-        <p>Don't have an account? <a href="/register">Register here</a></p>
+        <p><strong>Don't have an account? </strong><a href="/register">Register here</a></p>
     </div>
 </form>
 
 
 
-<!--        <section class="Form my-2 mx-5">-->
-<!--            <div class="container-fluid ">-->
-<!--                <div class="row">-->
-<!--                    <div class="col-lg-5">-->
-<!--                    </div>-->
-<!--                    <div class="col-lg-5 px-5 pt-5">-->
-<!--                        <h1 class="font-weight-bold py-5">Bri4ka</h1>-->
-<!--                        <h4>Sign into your account</h4>-->
-<!--                        <form th:method="POST"-->
-<!--                              th:action="@{/login}">-->
-
-<!--                            <div class="for-row">-->
-<!--                                <div class="col-lg-7">-->
-<!--                                    <input type="username" placeholder="Username" class="form-control my-3 p-2">-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-<!--                            <div class="for-row">-->
-<!--                                <div class="col-lg-7">-->
-<!--                                    <input type="password" placeholder="Password" class="form-control my-3 p-2">-->
-<!--                                    <p class="errors alert alert-danger">-->
-<!--                                        Invalid username or password.-->
-<!--                                    </p>-->
-<!--                                </div>-->
-<!--                            </div>-->
-
-<!--                            <div class="for-row">-->
-<!--                                <div class="col-lg-7">-->
-<!--                                    <button type="button" class="btn1 mt-3 mb-4">Login</button>-->
-<!--                                </div>-->
-<!--                                -->
-<!--                            </div>-->
-<!--                            <p>Don't have an account? <a href="#">Register here</a></p>-->
-<!--                          </div>-->
-<!--                        </form>-->
-<!--                    </div>-->
-<!--                </div>-->
-<!--            </div>-->
-
-<!--    </section>-->
 
 <th:block th:replace="fragments/commons::footer">footer</th:block>
 

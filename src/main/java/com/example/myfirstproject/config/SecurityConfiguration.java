@@ -12,7 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.security.web.context.SecurityContextRepository;
+
 
 
 @Configuration
@@ -26,7 +26,7 @@ public class SecurityConfiguration {
                 .authorizeHttpRequests()
                 .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
                 .requestMatchers("/static/**", "/css/**", "/img/**").permitAll()
-                .requestMatchers("/","/about-us").permitAll()
+                .requestMatchers("/","/about-us","/error").permitAll()
                 .requestMatchers("/login","/register","/login-error").anonymous()
                 .requestMatchers("/admin").hasRole(UserRoleEnum.ADMIN.name())
                 .anyRequest().authenticated()
@@ -34,34 +34,15 @@ public class SecurityConfiguration {
                 .loginPage("/login")
                 .usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
                 .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
-                .defaultSuccessUrl("/home",true)
+                .defaultSuccessUrl("/home")
                 .failureForwardUrl("/login-error")
                 .and()
-                .logout().deleteCookies("JSESSIONID").clearAuthentication(true).invalidateHttpSession(true)
+                .logout()
                 .logoutUrl("/logout")
-                .logoutSuccessUrl("/");
+                .logoutSuccessUrl("/")
+                .invalidateHttpSession(true)
+                .deleteCookies("JSESSIONID");
 
-//        http
-//                //which requests are allowed and which not
-//                .authorizeHttpRequests()
-//                .requestMatchers(PathRequest.toStaticResources().atCommonLocations()).permitAll()
-//                .requestMatchers("/static/**", "/js/**", "/css/**", "/img/**").permitAll()
-//                .requestMatchers("/", "/home", "/about-us", "/login/error","/login","/register").permitAll()
-//                .requestMatchers("/**").authenticated()
-////                .requestMatchers("/login","/register").anonymous()
-//                .and()
-//                .formLogin()
-//                .loginPage("/login")
-//                .usernameParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_USERNAME_KEY)
-//                .passwordParameter(UsernamePasswordAuthenticationFilter.SPRING_SECURITY_FORM_PASSWORD_KEY)
-//                .defaultSuccessUrl("/")
-//                .failureForwardUrl("/login-error")
-//                .and()
-//                .logout()
-//                .logoutUrl("/users/logout")
-//                .clearAuthentication(true)
-//                .deleteCookies("JSESSIONID")
-//                .logoutSuccessUrl("/");
 
         return http.build();
     }
