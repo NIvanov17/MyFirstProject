@@ -49,7 +49,7 @@ public class OfferEntity {
     private String imgURL;
 
     @ManyToOne
-    private UserRoleEntity seller;
+    private UserEntity seller;
 
     public long getId() {
         return id;
@@ -139,11 +139,11 @@ public class OfferEntity {
         this.imgURL = imgURL;
     }
 
-    public UserRoleEntity getSeller() {
+    public UserEntity getSeller() {
         return seller;
     }
 
-    public void setSeller(UserRoleEntity seller) {
+    public void setSeller(UserEntity seller) {
         this.seller = seller;
     }
 }
