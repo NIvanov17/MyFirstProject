@@ -1,5 +1,6 @@
 package com.example.myfirstproject.service;
 
+import com.example.myfirstproject.model.OfferEntity;
 import com.example.myfirstproject.model.UserEntity;
 import com.example.myfirstproject.model.UserRoleEntity;
 import com.example.myfirstproject.model.enums.UserRoleEnum;
@@ -7,6 +8,7 @@ import com.example.myfirstproject.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -65,4 +67,21 @@ public class UserService {
 
         this.userRepository.save(user);
     }
+
+    public UserEntity getUserByUsername(String name) {
+        return this.userRepository.findUserByUsername(name);
+    }
+
+    public void likeOffer(Principal principal, OfferEntity offer) {
+        UserEntity currentUser = this.userRepository.findUserByUsername(principal.getName());
+
+        List<OfferEntity> likedOffers = currentUser.getLikedOffers();
+
+        likedOffers.add(offer);
+
+        currentUser.setLikedOffers(likedOffers);
+        this.userRepository.save(currentUser);
+    }
+
+
 }

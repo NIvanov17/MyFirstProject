@@ -6,25 +6,40 @@
 
     <title>Offer</title>
 
-    <link rel="stylesheet" type="text/css" href="/css/offer.css" />
+    <link rel="stylesheet" type="text/css" href="/css/offer.css"/>
 
 </head>
 <body>
+<div class="wrapper" th:object="${offer}">
+    <header th:replace="fragments/commons::nav"></header>
 
-<header th:replace="fragments/commons::nav"></header>
-
+    <input type="hidden" name="offerId" id="offerId" th:value="*{id}">
     <section class="py-5">
-        <div class="container px-4 px-lg-5 my-5">
+        <div class="container px-4 px-lg-5 my-5 ">
             <div class="row gx-4 gx-lg-5 align-items-center">
-                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0" src="../img/offer.jpg" alt="..."></div>
+                <div class="col-md-6"><img class="card-img-top mb-5 mb-md-0"
+                                           th:src="@{${'data:image/jpg;base64, ' + offer.picture}}" alt="..."></div>
                 <div class="col-md-6">
                     <div class="small mb-1"></div>
-                    <h1 class="display-5 fw-bolder">Shop item template</h1>
-                    <div class="fs-5 mb-5">
-                        <span>$45.00</span>
-                        <div class="fs-5 mb-5">Seller telephone number</div>
+                    <h1 th:text="*{name}" class="display-5 fw-bolder h1">Offer Name</h1>
+                    <div class="fs-5 mb-3">
+                        <div th:text="'Price : ' + *{price}+'lv.'" class="fs-5 mb-3">price</div>
+                        <div th:text="'Seller name : '+ *{sellerFirstName} +' '+ *{sellerLastName}" class="fs-5 mb-3">
+                            SellerName
+                        </div>
+                        <div th:text="'Telephone number : ' + *{telephoneNumber}" class="fs-5 mb-3">Seller telephone number</div>
                     </div>
-                    <p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni, accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p>
+
+                    <div th:text="'Hp : ' + *{horsePower}" class="fs-5 mb-3">hp</div>
+                    <div th:text="'Year : ' + *{year}" class="fs-5 mb-3">year</div>
+                    <div th:text="'Engine Type : ' + *{engine}" class="fs-5 mb-3">engine</div>
+                    <div th:text="'Transmission Type : ' + *{transmission}" class="fs-5 mb-3">transmission</div>
+                    <div th:text="'Mileage : ' + *{mileage}" class="fs-5 mb-3">mileage</div>
+
+                    <p class="lead" >Description :</p>
+                    <div th:text="*{description}"><p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing
+                        elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni,
+                        accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p></div>
                     <div class="d-flex">
                         <button type="button" class="btn btn-outline-danger" data-mdb-ripple-color="dark">LIKE</button>
                     </div>
@@ -34,10 +49,8 @@
         </div>
     </section>
 
-
+</div>
 <footer th:replace="fragments/commons::footer"></footer>
-
-
 
 
 </body>

@@ -15,6 +15,9 @@ public class AddOfferDTO {
     @Size(min = 2)
     private String brand;
 
+    @NotBlank
+    private String name;
+
     @NotNull
     @Size(min = 1)
     private String model;
@@ -139,5 +142,13 @@ public class AddOfferDTO {
 
     public void setPicture(String picture) {
         this.picture = picture;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

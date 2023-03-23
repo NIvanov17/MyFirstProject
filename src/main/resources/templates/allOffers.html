@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <th:block th:replace="fragments/commons::head"></th:block>
+
+    <title>AllOffers</title>
+
+    <link rel="stylesheet" type="text/css" href="../css/offers.css" />
+</head>
+
+<body>
+
+<header th:replace="fragments/commons::nav"></header>
+
+
+            <section id="gallery" th:each="offer : ${allOffers}" th:object="${offer}">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-4 mb-4">
+                            <div class="card" style="width: 18rem;" >
+                                <img th:src="@{${'data:image/jpg;base64, ' + offer.picture}}" alt="" class="card-img-top">
+                                <div class="card-body">
+                                    <h5 th:text="*{name}"  class="card-title">VW GOLF II</h5>
+                                    <p th:text="*{description}" class="card-text">Very good car!</p>
+                                    <h6 th:text="*{price}+'lv.'">15.000$</h6>
+                                    <a th:href="@{offer/{id}(id = *{id})}" class="btn btn-outline-success">Read More</a>
+                                    <a th:href="@{offer/like/{id}(id = *{id})}" class="btn btn-outline-danger">LIKE</a>
+<!--                                    <button type="button" class="btn btn-outline-danger"-->
+<!--                                        data-mdb-ripple-color="dark">LIKE</button>-->
+                                    <button type="button" class="btn btn-outline-warning"
+                                        data-mdb-ripple-color="dark">DELETE</button>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </section>
+
+
+
+<nav aria-label="pagination">
+    <div class="fixed-bottom">
+    <ul class="pagination">
+        <li class="page-item"><a class="page-link" href="#">Previous</a></li>
+        <li class="page-item"><a class="page-link" href="#">1</a></li>
+        <li class="page-item"><a class="page-link" href="#">2</a></li>
+        <li class="page-item"><a class="page-link" href="#">3</a></li>
+        <li class="page-item"><a class="page-link" href="#">Next</a></li>
+    </ul>
+        </div>
+</nav>
+
+<footer th:replace="fragments/commons::footer">
+
+</body>
+
+</html>

@@ -16,11 +16,14 @@ public class OfferEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @ManyToOne
-    private CarBrandEntity brand;
+    @Column(nullable = false)
+    private String name;
 
     @ManyToOne
-    private CarModelEntity model;
+    private BrandEntity brand;
+
+    @ManyToOne
+    private ModelEntity model;
 
     @Column(nullable = false)
     private BigDecimal price;
@@ -45,8 +48,8 @@ public class OfferEntity {
     @Column(nullable = false)
     private String description;
 
-    @Column(nullable = true)
-    private String imgURL;
+    @Column(columnDefinition = "LONGTEXT")
+    private String picture;
 
     @ManyToOne
     private UserEntity seller;
@@ -59,19 +62,19 @@ public class OfferEntity {
         this.id = id;
     }
 
-    public CarBrandEntity getBrand() {
+    public BrandEntity getBrand() {
         return brand;
     }
 
-    public void setBrand(CarBrandEntity brand) {
+    public void setBrand(BrandEntity brand) {
         this.brand = brand;
     }
 
-    public CarModelEntity getModel() {
+    public ModelEntity getModel() {
         return model;
     }
 
-    public void setModel(CarModelEntity model) {
+    public void setModel(ModelEntity model) {
         this.model = model;
     }
 
@@ -131,12 +134,12 @@ public class OfferEntity {
         this.description = description;
     }
 
-    public String getImgURL() {
-        return imgURL;
+    public String getPicture() {
+        return picture;
     }
 
-    public void setImgURL(String imgURL) {
-        this.imgURL = imgURL;
+    public void setPicture(String picture) {
+        this.picture = picture;
     }
 
     public UserEntity getSeller() {
@@ -145,5 +148,13 @@ public class OfferEntity {
 
     public void setSeller(UserEntity seller) {
         this.seller = seller;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

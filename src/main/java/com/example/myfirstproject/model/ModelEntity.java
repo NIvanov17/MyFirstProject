@@ -7,14 +7,17 @@ import jakarta.persistence.*;
 
 @Entity
 @Table(name = "models")
-public class CarModelEntity {
+public class ModelEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Column(nullable = false)
+    private String name;
+
     @ManyToOne
-    private CarBrandEntity brand;
+    private BrandEntity brand;
 
     public long getId() {
         return id;
@@ -24,11 +27,19 @@ public class CarModelEntity {
         this.id = id;
     }
 
-    public CarBrandEntity getBrand() {
+    public BrandEntity getBrand() {
         return brand;
     }
 
-    public void setBrand(CarBrandEntity brand) {
+    public void setBrand(BrandEntity brand) {
         this.brand = brand;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }

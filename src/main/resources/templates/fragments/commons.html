@@ -68,7 +68,7 @@
 
 
                         <li class="nav-item" sec:authorize="isAuthenticated()">
-                            <form id="myLogoutForm" style="color: transparent" th:action="@{/logout}" th:method="post">
+                            <form id="myLogoutForm" style="color: black" th:action="@{/logout}" th:method="post">
                             <a onclick="document.getElementById('myLogoutForm').submit();" sec:authorize="isAuthenticated()"
                                class="nav-link text-white active h5">LOGOUT</a>
                             </form>
@@ -95,7 +95,7 @@
     <footer class="footer bg-transparent  py-2">
         <div class="container-fluid text-center">
             <div class="footer-background h5 text-dark fixed-bottom">
-                &copy; SoftUni Student 2022. All rights reserved.
+                &copy; Nikolay Ivanov - SoftUni Student 2023. All rights reserved.
             </div>
         </div>
     </footer>

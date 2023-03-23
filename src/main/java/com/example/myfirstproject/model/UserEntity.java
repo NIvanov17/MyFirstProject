@@ -33,6 +33,9 @@ public class UserEntity {
     @Column(name = "telephone-number", nullable = false)
     private String telephoneNumber;
 
+    @ManyToMany(fetch = FetchType.EAGER)
+    private List<OfferEntity> likedOffers;
+
     @ManyToMany
     private List<UserRoleEntity> roles;
 
@@ -103,5 +106,13 @@ public class UserEntity {
 
     public void setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
+    }
+
+    public List<OfferEntity> getLikedOffers() {
+        return likedOffers;
+    }
+
+    public void setLikedOffers(List<OfferEntity> likedOffers) {
+        this.likedOffers = likedOffers;
     }
 }

@@ -10,7 +10,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "brands")
-public class CarBrandEntity {
+public class BrandEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,9 +20,9 @@ public class CarBrandEntity {
     private String name;
 
     @OneToMany(mappedBy = "brand")
-    private List<CarModelEntity> models;
+    private List<ModelEntity> models;
 
-    public CarBrandEntity() {
+    public BrandEntity() {
         models = new ArrayList<>();
     }
 
@@ -42,11 +42,11 @@ public class CarBrandEntity {
         this.name = name;
     }
 
-    public List<CarModelEntity> getModels() {
+    public List<ModelEntity> getModels() {
         return models;
     }
 
-    public void setModels(List<CarModelEntity> models) {
+    public void setModels(List<ModelEntity> models) {
         this.models = models;
     }
 }
