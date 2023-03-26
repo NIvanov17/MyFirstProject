@@ -1,10 +1,12 @@
 package com.example.myfirstproject.service;
 
+import com.example.myfirstproject.model.DTOs.UsersDTO;
 import com.example.myfirstproject.model.OfferEntity;
 import com.example.myfirstproject.model.UserEntity;
 import com.example.myfirstproject.model.UserRoleEntity;
 import com.example.myfirstproject.model.enums.UserRoleEnum;
 import com.example.myfirstproject.repository.UserRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,18 +14,20 @@ import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
-
+    private final ModelMapper modelMapper;
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
 
 
-    public UserService(UserRepository userRepository, RoleService roleService, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, ModelMapper modelMapper, RoleService roleService, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.modelMapper = modelMapper;
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
     }
@@ -44,7 +48,6 @@ public class UserService {
             adminUser.setPassword(passwordEncoder.encode("1234"));
             adminUser.setTelephoneNumber("0896464970");
             adminUser.setRoles(roles);
-//            adminUser.setActive(true);
 
             this.userRepository.save(adminUser);
         }
@@ -83,5 +86,12 @@ public class UserService {
         this.userRepository.save(currentUser);
     }
 
+
+    public List<UsersDTO> getAllUsers() {
+        return userRepository.findAll()
+                .stream()
+                .map(u -> this.modelMapper.map(u, UsersDTO.class))
+                .collect(Collectors.toList());
+    }
 
 }

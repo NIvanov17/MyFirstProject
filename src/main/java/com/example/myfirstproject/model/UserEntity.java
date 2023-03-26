@@ -1,7 +1,6 @@
 package com.example.myfirstproject.model;
 
 
-
 import jakarta.persistence.*;
 
 
@@ -36,7 +35,7 @@ public class UserEntity {
     @ManyToMany(fetch = FetchType.EAGER)
     private List<OfferEntity> likedOffers;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.EAGER)
     private List<UserRoleEntity> roles;
 
 
@@ -114,5 +113,20 @@ public class UserEntity {
 
     public void setLikedOffers(List<OfferEntity> likedOffers) {
         this.likedOffers = likedOffers;
+    }
+
+    @Override
+    public String toString() {
+        return "UserEntity{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", username='" + username + '\'' +
+                ", email='" + email + '\'' +
+                ", password='" + (password != null ? "Provided" : "No Information") + '\'' +
+                ", telephoneNumber='" + telephoneNumber + '\'' +
+                ", likedOffers=" + likedOffers +
+                ", roles=" + roles +
+                '}';
     }
 }
