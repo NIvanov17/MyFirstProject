@@ -2,6 +2,8 @@ package com.example.myfirstproject.model;
 
 
 import jakarta.persistence.*;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 
 import java.util.ArrayList;
@@ -32,7 +34,9 @@ public class UserEntity {
     @Column(name = "telephone-number", nullable = false)
     private String telephoneNumber;
 
-    @ManyToMany(fetch = FetchType.EAGER)
+
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = CascadeType.REMOVE)
     private List<OfferEntity> likedOffers;
 
     @ManyToMany(fetch = FetchType.EAGER)

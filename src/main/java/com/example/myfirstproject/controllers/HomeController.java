@@ -21,4 +21,9 @@ public class HomeController {
     public String aboutUs(){
         return "about";
     }
+
+    @GetMapping("/admin")
+    public String adminPage() {
+        return "adminPage";
+    }
 }

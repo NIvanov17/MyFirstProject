@@ -40,10 +40,11 @@
                     <div th:text="*{description}"><p class="lead">Lorem ipsum dolor sit amet consectetur adipisicing
                         elit. Praesentium at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi alias magni,
                         accusamus eius blanditiis delectus ipsam minima ea iste laborum vero?</p></div>
-                    <div class="d-flex">
-                        <button type="button" class="btn btn-outline-danger" data-mdb-ripple-color="dark">LIKE</button>
-                    </div>
-                    <button type="button" class="btn btn-warning" data-mdb-ripple-color="dark">DELETE OFFER</button>
+
+                    <a th:href="@{/offer/like/{id}(id = *{id})}" class="btn btn-outline-danger">LIKE</a>
+                    <a th:href="@{/offer/disLike/{id}(id = *{id})}" class="btn btn-outline-danger">DISLIKE</a>
+                    <a th:href="@{/offer/delete/{id}(id = *{id})}" class="btn btn-warning">DELETE OFFER</a>
+<!--                    <button type="button" class="btn btn-warning" data-mdb-ripple-color="dark">DELETE OFFER</button>-->
                 </div>
             </div>
         </div>

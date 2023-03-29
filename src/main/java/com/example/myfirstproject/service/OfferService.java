@@ -3,9 +3,12 @@ package com.example.myfirstproject.service;
 
 import com.example.myfirstproject.model.DTOs.AddOfferDTO;
 import com.example.myfirstproject.model.OfferEntity;
+import com.example.myfirstproject.model.UserEntity;
 import com.example.myfirstproject.model.enums.EngineEnum;
 import com.example.myfirstproject.model.enums.TransmissionEnum;
+import com.example.myfirstproject.model.views.OfferDetailsView;
 import com.example.myfirstproject.repository.OfferRepository;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,16 +48,43 @@ public class OfferService {
         this.offerRepository.save(offer);
     }
 
-    public List<OfferEntity> getAllOffers(){
+    public List<OfferEntity> getAllOffers() {
         return this.offerRepository.findAll();
 
     }
 
-    public OfferEntity getOfferById(Long id){
+    public OfferEntity getOfferById(Long id) {
         return this.offerRepository.findById(id)
-                .orElseThrow(()-> new RuntimeException("Unable to find offer!"));
+                .orElseThrow(() -> new RuntimeException("Unable to find offer!"));
     }
 
 
+    public OfferDetailsView getOfferDetails(Long id) {
 
+        OfferEntity offer = this.getOfferById(id);
+
+        return new OfferDetailsView(
+                offer.getId(),
+                offer.getPicture(),
+                offer.getName(),
+                offer.getSeller().getFirstName(),
+                offer.getSeller().getLastName(),
+                offer.getPrice(),
+                offer.getHorsePower(),
+                offer.getEngine().toString(),
+                offer.getTransmission().toString(),
+                offer.getYear(),
+                offer.getMileage(),
+                offer.getDescription(),
+                offer.getSeller().getTelephoneNumber());
+    }
+
+    @Transactional
+    public void deleteOffer(Long id, Principal principal) {
+        OfferEntity offer = this.getOfferById(id);
+
+            userService.disLikeOffer(principal, offer);
+
+        offerRepository.delete(offer);
+    }
 }

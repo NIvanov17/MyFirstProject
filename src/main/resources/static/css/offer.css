@@ -7,7 +7,7 @@ body{
 .banner{
 height: 100vh;
 width: 100%;
-/* background:url('singleoffer.jpg'); */
+ background:url('/img/singleoffer.jpg');
 background-position: center;
 background-size: cover;
 background-attachment: fixed;
@@ -20,7 +20,7 @@ background-repeat: no-repeat;
 
 
 .navbar-brand{
-    color: black;
+    color: white;
     font-size: 2.8em;
     font-weight: 400;
     margin-left: 10%;
@@ -32,7 +32,7 @@ background-repeat: no-repeat;
 }
 
 .banner .nav li a{
-    color: black;
+    color: white;
     font-size: 1.5em;
 }
 
@@ -72,9 +72,19 @@ background-repeat: no-repeat;
 /*  }*/
 
   .card{
-    color: black;
+    color: white;
   }
 
   .btn-outline-danger {
     @apply text-red-600 rounded-md border border-red-600 hover:bg-red-500 hover:text-white;
+  }
+
+
+
+  .footer{
+      color: white;
+  }
+
+  .col-md-6{
+      color: white;
   }

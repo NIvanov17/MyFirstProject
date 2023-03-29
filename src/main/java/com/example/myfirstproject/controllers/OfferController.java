@@ -9,6 +9,7 @@ import com.example.myfirstproject.service.OfferService;
 import com.example.myfirstproject.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -16,10 +17,10 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import java.awt.print.Pageable;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
@@ -55,7 +56,7 @@ public class OfferController {
             return "redirect:/add-offer";
         }
 
-        this.offerService.addOffer(principal,addOfferDTO, file);
+        this.offerService.addOffer(principal, addOfferDTO, file);
 
         return "redirect:/all-offers";
     }
@@ -67,30 +68,29 @@ public class OfferController {
 
     @GetMapping("/offer/{id}")
     public String offerDetails(@PathVariable("id") Long id,
-                               Model model) {
-        OfferEntity offer = this.offerService.getOfferById(id);
-        OfferDetailsView offerDetailsView = new OfferDetailsView(
-                offer.getId(),
-                offer.getPicture(),
-                offer.getName(),
-                offer.getSeller().getFirstName(),
-                offer.getSeller().getLastName(),
-                offer.getPrice(),
-                offer.getHorsePower(),
-                offer.getEngine().toString(),
-                offer.getTransmission().toString(),
-                offer.getYear(),
-                offer.getMileage(),
-                offer.getDescription(),
-                offer.getSeller().getTelephoneNumber());
+                               Model model, Principal principal) {
 
-        model.addAttribute("offer",offerDetailsView);
+//        UserEntity currentUser = this.userService.getUserByUsername(principal.getName());
+//        List<OfferEntity> likedOffers = this.userService.getLikedOffers(currentUser);
+//        OfferEntity offer = this.offerService.getOfferById(id);
+//
+//       Optional<OfferEntity> resultEntity = likedOffers.stream().filter(o -> o.getId() == offer.getId()).findFirst();
+//
+//        if (resultEntity.isPresent()) {
+//            model.addAttribute("isLiked", true);
+//        }else {
+//            model.addAttribute("isLiked",false);
+//        }
+
+        OfferDetailsView offerDetails = offerService.getOfferDetails(id);
+
+        model.addAttribute("offer", offerDetails);
 
         return "offer";
     }
 
     @GetMapping("/all-offers")
-    public String allOffers(Model model) {
+    public String allOffers(Model model, Principal principal) {
 
         List<OfferEntity> allOffers = this.offerService.getAllOffers();
 
@@ -108,11 +108,11 @@ public class OfferController {
     }
 
     @GetMapping("/liked-offers")
-    public String likedOffers(Principal principal,Model model){
+    public String likedOffers(Principal principal, Model model) {
 
         List<OfferEntity> likedOffers = this.userService.getUserByUsername(principal.getName()).getLikedOffers();
 
-        likedOffers.stream().map(l->new AllOffersView(
+        likedOffers.stream().map(l -> new AllOffersView(
                 l.getId(),
                 l.getName(),
                 l.getPicture(),
@@ -120,19 +120,42 @@ public class OfferController {
                 l.getDescription()
         )).collect(Collectors.toList());
 
-        model.addAttribute("likedOffers",likedOffers);
+        model.addAttribute("likedOffers", likedOffers);
 
         return "likedOffers";
     }
 
-    @GetMapping("offer/like/{id}")
-    public String likeOffer(Principal principal,
-                          @PathVariable("id")Long id){
-        OfferEntity offer = offerService.getOfferById(id);
+    @GetMapping("/offer/like/{id}")
+    public String likeOffer(@PathVariable("id") Long id,
+                            Principal principal,
+                            Model model) {
 
-        this.userService.likeOffer(principal,offer);
+        OfferEntity offer = offerService.getOfferById(id);
+        this.userService.likeOffer(principal, offer);
+
 
         return "redirect:/liked-offers";
 
     }
+
+    @GetMapping("/offer/disLike/{id}")
+    public String disLikeOffer(@PathVariable("id") Long id,
+                               Principal principal,
+                               Model model) {
+
+        OfferEntity offer = offerService.getOfferById(id);
+        this.userService.disLikeOffer(principal, offer);
+
+
+        return "redirect:/liked-offers";
+    }
+
+    @GetMapping("/offer/delete/{id}")
+    public String deleteOffer(@PathVariable("id") Long id,
+                              Principal principal){
+
+        offerService.deleteOffer(id,principal);
+        return "redirect:/all-offers";
+    }
+
 }

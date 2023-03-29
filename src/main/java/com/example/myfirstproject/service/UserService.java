@@ -5,6 +5,7 @@ import com.example.myfirstproject.model.OfferEntity;
 import com.example.myfirstproject.model.UserEntity;
 import com.example.myfirstproject.model.UserRoleEntity;
 import com.example.myfirstproject.model.enums.UserRoleEnum;
+import com.example.myfirstproject.repository.OfferRepository;
 import com.example.myfirstproject.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -23,13 +25,15 @@ public class UserService {
     private final ModelMapper modelMapper;
     private final RoleService roleService;
     private final PasswordEncoder passwordEncoder;
+    private final OfferRepository offerRepository;
 
 
-    public UserService(UserRepository userRepository, ModelMapper modelMapper, RoleService roleService, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, ModelMapper modelMapper, RoleService roleService, PasswordEncoder passwordEncoder, OfferRepository offerRepository) {
         this.userRepository = userRepository;
         this.modelMapper = modelMapper;
         this.roleService = roleService;
         this.passwordEncoder = passwordEncoder;
+        this.offerRepository = offerRepository;
     }
 
     public void initFirstUser() {
@@ -80,6 +84,14 @@ public class UserService {
 
         List<OfferEntity> likedOffers = currentUser.getLikedOffers();
 
+        Optional<OfferEntity> currentOffer = likedOffers.stream()
+                .filter(o -> o.getId() == offer.getId())
+                .findFirst();
+
+        if(currentOffer.isPresent()){
+            return;
+        }
+
         likedOffers.add(offer);
 
         currentUser.setLikedOffers(likedOffers);
@@ -94,4 +106,35 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
+    public Optional<UsersDTO> getUserById(Long id) {
+        return this.userRepository.findById(id)
+                .map(u -> this.modelMapper.map(u, UsersDTO.class));
+    }
+
+    public void deleteById(Long id) {
+        this.userRepository.deleteById(id);
+    }
+
+    public List<OfferEntity> getLikedOffers(UserEntity currentUser) {
+        return currentUser.getLikedOffers();
+    }
+
+
+    public void disLikeOffer(Principal principal, OfferEntity offer) {
+        UserEntity currentUser = this.userRepository.findUserByUsername(principal.getName());
+
+        List<OfferEntity> likedOffers = currentUser.getLikedOffers();
+
+        Optional<OfferEntity> currentOffer = likedOffers.stream()
+                .filter(o -> o.getId() == offer.getId())
+                .findFirst();
+
+        if(currentOffer.isPresent()){
+
+            likedOffers.remove(likedOffers.stream().filter(o -> o.getId() == offer.getId()).findFirst().get());
+            currentUser.setLikedOffers(likedOffers);
+
+            this.userRepository.save(currentUser);
+        }
+    }
 }

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:replace="fragments/commons::head"></th:block>
+    <title>AdminPage</title>
+    <link rel="stylesheet" type="text/css" href="/css/home.css" />
+</head>
+
+<body>
+<header th:replace="fragments/commons::nav"></header>
+
+<div class="container-fluid justify-content-center text-center mb-4">
+    <h1>ADMIN PAGE</h1>
+</div>
+<button id="loadAllUsers" type="button" class="btn btn-dark">LOAD ALL USERS</button>
+<table class="table table-striped mb-4"  >
+    <h4 class="text-center mt-10">ALL USERS</h4>
+
+    <thead>
+    <tr>
+        <th scope="col">ID</th>
+        <th scope="col">USERNAME</th>
+        <th scope="col">CURRENT ROLES</th>
+    </tr>
+    </thead>
+    <tbody id="userTableBody">
+
+    <tr>
+        <th scope="row"></th>
+        <td ></td>
+        <td></td>
+        <td>
+        </td>
+    </tr>
+
+    </tbody>
+</table>
+
+
+
+
+<footer th:replace="fragments/commons::footer"></footer>
+<script src="/js/admin.js"></script>
+</body>
+
+
+</html>

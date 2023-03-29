@@ -2,11 +2,14 @@ package com.example.myfirstproject.model;
 
 import com.example.myfirstproject.model.enums.EngineEnum;
 import com.example.myfirstproject.model.enums.TransmissionEnum;
+import com.example.myfirstproject.repository.OfferRepository;
+import com.example.myfirstproject.service.OfferService;
 import jakarta.persistence.*;
 
 
-
+import java.lang.annotation.Target;
 import java.math.BigDecimal;
+import java.util.List;
 
 @Entity
 @Table(name = "offers")
@@ -53,6 +56,7 @@ public class OfferEntity {
 
     @ManyToOne
     private UserEntity seller;
+
 
     public long getId() {
         return id;
