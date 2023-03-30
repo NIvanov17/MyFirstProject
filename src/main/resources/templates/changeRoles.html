@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:replace="fragments/commons::head"></th:block>
+    <title>AdminPage</title>
+    <link rel="stylesheet" type="text/css" href="/css/home.css" />
+</head>
+
+<body>
+<header th:replace="fragments/commons::nav"></header>
+
+<table class="table table-striped mb-4 ">
+    <h4 class="text-center mt-10">USER</h4>
+    <thead>
+    <tr>
+        <th scope="col" >ID</th>
+        <th scope="col" >USERNAME</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <th scope="row" th:text="${userDTO.id}"></th>
+        <td th:text="${userDTO.username}"></td>
+        <td></td>
+        <td>
+            <a th:each="r: ${missingRoles}" th:object="${r}"
+               th:href="@{/admin/addRole/{id}/{id2}(id = *{id}, id2 = ${userDTO.id})}" class="btn btn-dark m-2"
+               th:text="|ADD ROLE|"></a>
+
+        </td>
+
+        <td>
+            <a th:each="r: ${roles}" th:object="${r}"
+               th:href="@{/admin/removeRole/{id}/{id2}(id = *{id}, id2 = ${userDTO.id})}" class="btn btn-dark m-2"
+               th:text="|REMOVE ROLE|"></a>
+        </td>
+
+    </tr>
+
+    </tbody>
+</table>
+
+
+
+
+
+<footer th:replace="fragments/commons::footer"></footer>
+<script src="/js/admin.js"></script>
+</body>
+
+
+</html>

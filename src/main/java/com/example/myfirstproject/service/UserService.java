@@ -88,7 +88,7 @@ public class UserService {
                 .filter(o -> o.getId() == offer.getId())
                 .findFirst();
 
-        if(currentOffer.isPresent()){
+        if (currentOffer.isPresent()) {
             return;
         }
 
@@ -129,12 +129,32 @@ public class UserService {
                 .filter(o -> o.getId() == offer.getId())
                 .findFirst();
 
-        if(currentOffer.isPresent()){
+        if (currentOffer.isPresent()) {
 
             likedOffers.remove(likedOffers.stream().filter(o -> o.getId() == offer.getId()).findFirst().get());
             currentUser.setLikedOffers(likedOffers);
 
             this.userRepository.save(currentUser);
         }
+    }
+
+    public Optional<UsersDTO> getUserDTO(Long id) {
+        return this.userRepository.findById(id)
+                .map(u -> modelMapper.map(u, UsersDTO.class));
+    }
+
+    public void addRole(Long roleId, Long userID) {
+
+        UserEntity userById = this.userRepository.findById(userID).get();
+        UserRoleEntity roleById = this.roleService.getRoleById(roleId).get();
+
+        userById.addRole(roleById);
+    }
+
+    public void removeRole(Long roleId, Long userId) {
+        UserEntity userEntity = this.userRepository.findById(userId).get();
+        UserRoleEntity roleById = this.roleService.getRoleById(roleId).get();
+
+        userEntity.removeRole(roleById);
     }
 }

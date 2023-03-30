@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 
 import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class RoleService {
@@ -29,11 +32,23 @@ public class RoleService {
         }
     }
 
+    public Optional<UserRoleEntity> getRoleById(Long id){
+        return this.roleRepository.findById(id);
+    }
+
     public UserRoleEntity findAdminRoleByName(UserRoleEnum admin) {
         return roleRepository.findRoleByName(UserRoleEnum.ADMIN);
     }
 
-    public UserRoleEntity findUserRoleByName(UserRoleEnum user){
+    public UserRoleEntity findUserRoleByName(UserRoleEnum user) {
         return roleRepository.findRoleByName(UserRoleEnum.USER);
+    }
+
+    public List<UserRoleEntity> getMissingRoles(List<UserRoleEntity> roles) {
+        List<UserRoleEntity> all = this.roleRepository.findAll();
+
+        return all.stream()
+                .filter(r -> !roles.contains(r))
+                .collect(Collectors.toList());
     }
 }

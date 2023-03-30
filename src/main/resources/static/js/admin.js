@@ -21,15 +21,19 @@ function loadUsers() {
 
             let resultRoles = '';
             let currentRoles = document.createElement('td');
-            user.roles.forEach(r => resultRoles = resultRoles + r.toString() + " ")
+            for(let role in user.roles){
+                    resultRoles = resultRoles + role + " ";
+            }
+            // user.roles.forEach(r => resultRoles = resultRoles + r.toString() + " ")
 
             currentRoles.textContent = resultRoles;
 
             let rolesCol = document.createElement('td');
-            let changeRolesBtn = document.createElement('button')
+            let changeRolesBtn = document.createElement('a')
             changeRolesBtn.classList.add("btn");
             changeRolesBtn.classList.add("btn-dark");
             changeRolesBtn.innerText = "Change Roles";
+            changeRolesBtn.href = `/admin/change/${user.id}`;
 
             rolesCol.appendChild(changeRolesBtn);
 

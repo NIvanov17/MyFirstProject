@@ -119,6 +119,14 @@ public class UserEntity {
         this.likedOffers = likedOffers;
     }
 
+    public void addRole(UserRoleEntity role) {
+        this.roles.add(role);
+    }
+
+    public void removeRole(UserRoleEntity role) {
+        this.roles.remove(role);
+    }
+
     @Override
     public String toString() {
         return "UserEntity{" +
