@@ -70,21 +70,11 @@ public class OfferController {
     public String offerDetails(@PathVariable("id") Long id,
                                Model model, Principal principal) {
 
-//        UserEntity currentUser = this.userService.getUserByUsername(principal.getName());
-//        List<OfferEntity> likedOffers = this.userService.getLikedOffers(currentUser);
-//        OfferEntity offer = this.offerService.getOfferById(id);
-//
-//       Optional<OfferEntity> resultEntity = likedOffers.stream().filter(o -> o.getId() == offer.getId()).findFirst();
-//
-//        if (resultEntity.isPresent()) {
-//            model.addAttribute("isLiked", true);
-//        }else {
-//            model.addAttribute("isLiked",false);
-//        }
-
         OfferDetailsView offerDetails = offerService.getOfferDetails(id);
+        UserEntity user = userService.getUserByUsername(principal.getName());
 
         model.addAttribute("offer", offerDetails);
+        model.addAttribute("canDelete", offerService.isOwner(id, principal));
 
         return "offer";
     }
@@ -152,9 +142,9 @@ public class OfferController {
 
     @GetMapping("/offer/delete/{id}")
     public String deleteOffer(@PathVariable("id") Long id,
-                              Principal principal){
+                              Principal principal) {
 
-        offerService.deleteOffer(id,principal);
+        offerService.deleteOffer(id, principal);
         return "redirect:/all-offers";
     }
 

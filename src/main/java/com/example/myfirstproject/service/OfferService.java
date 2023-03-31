@@ -6,8 +6,10 @@ import com.example.myfirstproject.model.OfferEntity;
 import com.example.myfirstproject.model.UserEntity;
 import com.example.myfirstproject.model.enums.EngineEnum;
 import com.example.myfirstproject.model.enums.TransmissionEnum;
+import com.example.myfirstproject.model.enums.UserRoleEnum;
 import com.example.myfirstproject.model.views.OfferDetailsView;
 import com.example.myfirstproject.repository.OfferRepository;
+import com.example.myfirstproject.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
@@ -17,7 +19,6 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.Base64;
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class OfferService {
@@ -25,11 +26,13 @@ public class OfferService {
     private final OfferRepository offerRepository;
     private final ModelMapper modelMapper;
     private UserService userService;
+    private final UserRepository userRepository;
 
-    public OfferService(OfferRepository offerRepository, ModelMapper modelMapper, UserService userService) {
+    public OfferService(OfferRepository offerRepository, ModelMapper modelMapper, UserService userService, UserRepository userRepository) {
         this.offerRepository = offerRepository;
         this.modelMapper = modelMapper;
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
 
@@ -81,10 +84,38 @@ public class OfferService {
 
     @Transactional
     public void deleteOffer(Long id, Principal principal) {
-        OfferEntity offer = this.getOfferById(id);
 
-            userService.disLikeOffer(principal, offer);
+        OfferEntity offer = this.getOfferById(id);
+        UserEntity owner = offer.getSeller();
+
+        if (!isOwner(id, principal)) {
+            return;
+        }
+        userService.disLikeOffer(principal, offer);
 
         offerRepository.delete(offer);
+    }
+
+    public boolean isOwner(Long id, Principal principal) {
+        UserEntity currentUser = userService.getUserByUsername(principal.getName());
+
+        boolean isOwner = this.offerRepository.findById(id)
+                .filter(o -> o.getSeller().equals(currentUser))
+                .isPresent();
+
+        if (isOwner) {
+            return true;
+        }
+
+        return userRepository
+                .findByUsername(principal.getName())
+                .filter(this::isAdmin)
+                .isPresent();
+    }
+
+    public boolean isAdmin(UserEntity user) {
+        return user.getRoles()
+                .stream()
+                .anyMatch(r -> r.getRole() == UserRoleEnum.ADMIN);
     }
 }

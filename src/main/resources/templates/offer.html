@@ -43,7 +43,7 @@
 
                     <a th:href="@{/offer/like/{id}(id = *{id})}" class="btn btn-outline-danger">LIKE</a>
                     <a th:href="@{/offer/disLike/{id}(id = *{id})}" class="btn btn-outline-danger">DISLIKE</a>
-                    <a th:href="@{/offer/delete/{id}(id = *{id})}" class="btn btn-warning">DELETE OFFER</a>
+                    <a th:if="${canDelete}" th:href="@{/offer/delete/{id}(id = *{id})}" class="btn btn-warning">DELETE OFFER</a>
 <!--                    <button type="button" class="btn btn-warning" data-mdb-ripple-color="dark">DELETE OFFER</button>-->
                 </div>
             </div>
