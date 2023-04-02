@@ -78,6 +78,7 @@ public class OfferController {
 
         model.addAttribute("offer", offerDetails);
         model.addAttribute("canDelete", offerService.isOwner(id, principal));
+        model.addAttribute("isLiked", offerService.isLiked(id, principal));
 
         return "offer";
     }

@@ -108,6 +108,15 @@ public class OfferService {
         offerRepository.delete(offer);
     }
 
+    public boolean isLiked(Long id, Principal principal) {
+        UserEntity currentUser = userService.getUserByUsername(principal.getName());
+
+        OfferEntity offer = offerRepository.findById(id).get();
+
+        return currentUser.getLikedOffers()
+                .contains(offer);
+    }
+
     public boolean isOwner(Long id, Principal principal) {
         UserEntity currentUser = userService.getUserByUsername(principal.getName());
 

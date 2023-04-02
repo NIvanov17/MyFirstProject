@@ -1,0 +1,33 @@
+body {
+    padding: 2%;
+    font-family: verdana;
+    text-align: center;
+    margin-top: 1%;
+    line-height: 30px;
+}
+.bluebg
+{background-color:#2b7575;}
+.txtblue {
+    font-size: 18px;
+    font-weight: 100;
+    color: #0094ff;
+    line-height:0.75em;
+}
+.txtlightyellow {
+    font-size: 24px;
+    font-weight: 100;
+    color: #fef9b5;
+    line-height:0.75em;
+}
+.txtwhite {
+    font-size: 24px;
+    font-weight: 400;
+    color: #fff;
+}
+.txtyellow {
+    font-size: 24px;
+    color: #ffd400;
+}
+.imgcenter {width:20%; margin:0.75em; padding:30px;border:2px solid #306f6f;border-radius:50px;background-color:#338e8e;box-shadow: #2e6565 5px 5px 10px;
+    border-radius: 50px;
+}
