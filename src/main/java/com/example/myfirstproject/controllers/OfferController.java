@@ -1,15 +1,15 @@
 package com.example.myfirstproject.controllers;
 
-import com.example.myfirstproject.model.DTOs.AddOfferDTO;
+import com.example.myfirstproject.model.DTOs.offer.AddOfferDTO;
 import com.example.myfirstproject.model.OfferEntity;
 import com.example.myfirstproject.model.UserEntity;
 import com.example.myfirstproject.model.views.AllOffersView;
 import com.example.myfirstproject.model.views.OfferDetailsView;
+import com.example.myfirstproject.service.BrandService;
 import com.example.myfirstproject.service.OfferService;
 import com.example.myfirstproject.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -20,24 +20,27 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import java.io.IOException;
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Controller
 public class OfferController {
 
     private final OfferService offerService;
-
+    private final BrandService brandService;
     private final UserService userService;
 
     @Autowired
-    public OfferController(OfferService offerService, UserService userService) {
+    public OfferController(OfferService offerService, BrandService brandService, UserService userService) {
         this.offerService = offerService;
+        this.brandService = brandService;
         this.userService = userService;
     }
 
     @GetMapping("/add-offer")
-    public String addOffer() {
+    public String addOffer(Model model) {
+
+        model.addAttribute("brands", brandService.getAllBrands());
+
         return "add-offer";
     }
 
@@ -86,7 +89,8 @@ public class OfferController {
 
         allOffers.stream().map(o -> new AllOffersView(
                 o.getId(),
-                o.getName(),
+                o.getBrand().getName(),
+                o.getModel().getName(),
                 o.getPicture(),
                 o.getPrice(),
                 o.getDescription()
@@ -104,7 +108,8 @@ public class OfferController {
 
         likedOffers.stream().map(l -> new AllOffersView(
                 l.getId(),
-                l.getName(),
+                l.getBrand().getName(),
+                l.getModel().getName(),
                 l.getPicture(),
                 l.getPrice(),
                 l.getDescription()

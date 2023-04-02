@@ -19,7 +19,8 @@ public class BrandEntity {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "brand")
+    @OneToMany(mappedBy = "brand",
+    fetch = FetchType.EAGER)
     private List<ModelEntity> models;
 
     public BrandEntity() {

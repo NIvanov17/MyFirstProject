@@ -1,26 +1,19 @@
-package com.example.myfirstproject.model.DTOs;
+package com.example.myfirstproject.model.DTOs.offer;
 
-import com.example.myfirstproject.model.enums.EngineEnum;
-import com.example.myfirstproject.model.enums.TransmissionEnum;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-import jakarta.validation.constraints.Size;
 
 import java.math.BigDecimal;
 
 public class AddOfferDTO {
 
     @NotNull
-    @Size(min = 2)
-    private String brand;
-
-    @NotBlank
-    private String name;
+    private Long brand;
 
     @NotNull
-    @Size(min = 1)
-    private String model;
+    private Long model;
+
 
     @NotNull
     private BigDecimal price;
@@ -51,7 +44,7 @@ public class AddOfferDTO {
     public AddOfferDTO() {
     }
 
-    public AddOfferDTO(String brand, String model, BigDecimal price, int horsePower, String engine, String transmission, int year, int mileage, String description, String picture) {
+    public AddOfferDTO(long brand, Long model, BigDecimal price, int horsePower, String engine, String transmission, int year, int mileage, String description, String picture) {
         this.brand = brand;
         this.model = model;
         this.price = price;
@@ -64,21 +57,23 @@ public class AddOfferDTO {
         this.picture = picture;
     }
 
-    public String getBrand() {
+    public Long getBrand() {
         return brand;
     }
 
-    public void setBrand(String brand) {
+    public AddOfferDTO setBrand(Long brand) {
         this.brand = brand;
+        return this;
     }
 
-    public String getModel() {
+    public Long getModel() {
         return model;
     }
 
-    public void setModel(String model) {
+    public void setModel(Long model) {
         this.model = model;
     }
+
 
     public BigDecimal getPrice() {
         return price;
@@ -144,11 +139,4 @@ public class AddOfferDTO {
         this.picture = picture;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 }

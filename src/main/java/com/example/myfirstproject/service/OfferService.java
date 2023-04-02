@@ -1,13 +1,17 @@
 package com.example.myfirstproject.service;
 
 
-import com.example.myfirstproject.model.DTOs.AddOfferDTO;
+import com.example.myfirstproject.model.BrandEntity;
+import com.example.myfirstproject.model.DTOs.offer.AddOfferDTO;
+import com.example.myfirstproject.model.ModelEntity;
 import com.example.myfirstproject.model.OfferEntity;
 import com.example.myfirstproject.model.UserEntity;
 import com.example.myfirstproject.model.enums.EngineEnum;
 import com.example.myfirstproject.model.enums.TransmissionEnum;
 import com.example.myfirstproject.model.enums.UserRoleEnum;
 import com.example.myfirstproject.model.views.OfferDetailsView;
+import com.example.myfirstproject.repository.BrandRepository;
+import com.example.myfirstproject.repository.ModelRepository;
 import com.example.myfirstproject.repository.OfferRepository;
 import com.example.myfirstproject.repository.UserRepository;
 import jakarta.transaction.Transactional;
@@ -27,12 +31,16 @@ public class OfferService {
     private final ModelMapper modelMapper;
     private UserService userService;
     private final UserRepository userRepository;
+    private final BrandRepository brandRepository;
+    private final ModelRepository modelRepository;
 
-    public OfferService(OfferRepository offerRepository, ModelMapper modelMapper, UserService userService, UserRepository userRepository) {
+    public OfferService(OfferRepository offerRepository, ModelMapper modelMapper, UserService userService, UserRepository userRepository, BrandRepository brandRepository, ModelRepository modelRepository) {
         this.offerRepository = offerRepository;
         this.modelMapper = modelMapper;
         this.userService = userService;
         this.userRepository = userRepository;
+        this.brandRepository = brandRepository;
+        this.modelRepository = modelRepository;
     }
 
 
@@ -41,12 +49,15 @@ public class OfferService {
         addOfferDTO.setPicture(Base64.getEncoder().encodeToString(file.getBytes()));
         TransmissionEnum transmissionEnum = TransmissionEnum.valueOf(addOfferDTO.getTransmission());
         EngineEnum engineEnum = EngineEnum.valueOf(addOfferDTO.getEngine());
+        ModelEntity modelById = this.modelRepository.findById(addOfferDTO.getModel()).orElseThrow();
 
         OfferEntity offer = this.modelMapper.map(addOfferDTO, OfferEntity.class);
 
         offer.setSeller(this.userService.getUserByUsername(principal.getName()));
         offer.setEngine(engineEnum);
         offer.setTransmission(transmissionEnum);
+        offer.setModel(modelById);
+        offer.setBrand(modelById.getBrand());
 
         this.offerRepository.save(offer);
     }
@@ -68,8 +79,9 @@ public class OfferService {
 
         return new OfferDetailsView(
                 offer.getId(),
+                offer.getBrand().getName(),
+                offer.getModel().getName(),
                 offer.getPicture(),
-                offer.getName(),
                 offer.getSeller().getFirstName(),
                 offer.getSeller().getLastName(),
                 offer.getPrice(),

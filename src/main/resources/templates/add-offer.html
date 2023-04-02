@@ -24,65 +24,48 @@
         <div class="row">
 
             <div class="form-group col-md-6 mb-3">
-                <label class="text-center text-white font-weight-bold">Offer name</label>
-                <input id="name"
-                       type="text"
-                       placeholder="Offer name"
-                       class="form-control"
-                       th:field="*{name}"
-                       th:errorclass="is-invalid"
-
-                />
+                <label class="text-center text-white font-weight-bold" for="brand">Brand</label>
+                <select id="brand"
+                        name="brand"
+                        th:errorclass="is-invalid"
+                        class="form-control">
+                    <option value="">Select a brand</option>
+                    <option
+                            th:each="brand : ${brands}"
+                            th:text="${brand.name}"
+                            th:value="${brand.id}"
+                            th:selected="*{brand} == ${brand.id}">Brand
+                    </option>
+                </select>
                 <p class="invalid-feedback errors alert alert-danger">
-                    Vechicle Brand is required.
+                    Vechicle brand is required.
                 </p>
             </div>
 
-            <div class="form-group col-md-6 mb-3">
-
-<!--                <select id="brandId"-->
-<!--                        name="brandId"-->
-<!--                        th:errorclass="is-invalid"-->
-<!--                        class="form-control">-->
-<!--                    <option value="">- Select a brand -</option>-->
-<!--                    <optgroup-->
-<!--                            th:each="brand : ${brands}"-->
-<!--                            th:label="${brand.name}">-->
-<!--                        <option-->
-<!--                                th:each="model : ${brand.models}"-->
-<!--                                th:text="${model.name}"-->
-<!--                                th:value="${model.id}"-->
-<!--                                th:selected="*{modelId} == ${model.id}">Model-->
-<!--                        </option>-->
-<!--                    </optgroup>-->
-<!--                </select>-->
-                <label class="text-center text-white font-weight-bold" for="Brand">Brand</label>
-                <input id="brand"
-                       type="text"
-                       placeholder="Brand"
-                       class="form-control"
-                       th:field="*{brand}"
-                       th:errorclass="is-invalid"
-
-                />
-                <p class="invalid-feedback errors alert alert-danger">
-                    Vechicle Brand is required.
-                </p>
-            </div>
 
             <div class="form-group col-md-6 mb-3">
                 <label class="text-center text-white font-weight-bold" for="model">Model</label>
-                <input id="model"
-                       type="text"
-                       placeholder="Model"
-                       class="form-control"
-                       th:field="*{model}"
-                       th:errorclass="is-invalid"
-                />
+                <select id="model"
+                        name="model"
+                        th:errorclass="is-invalid"
+                        class="form-control">
+                    <option value="">Select a model</option>
+                    <optgroup
+                            th:each="brand : ${brands}"
+                            th:label="${brand.name}">
+                        <option
+                                th:each="model : ${brand.models}"
+                                th:text="${model.name}"
+                                th:value="${model.id}"
+                                th:selected="*{model} == ${model.id}">Model
+                        </option>
+                    </optgroup>
+                </select>
                 <p class="invalid-feedback errors alert alert-danger">
                     Vechicle model is required.
                 </p>
             </div>
+
             <div class="form-group col-md-6 mb-3">
                 <label for="price" class="text-white font-weight-bold">Price</label>
                 <input id="price" type="number" min="0" step="100" class="form-control"

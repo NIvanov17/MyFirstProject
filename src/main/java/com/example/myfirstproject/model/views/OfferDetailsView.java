@@ -6,6 +6,10 @@ public class OfferDetailsView {
 
     private  long id;
 
+    private String brand;
+
+    private String model;
+
     private String picture;
 
     private String name;
@@ -31,13 +35,13 @@ public class OfferDetailsView {
     private String telephoneNumber;
 
 
-    public OfferDetailsView(long id, String picture, String name, String sellerFirstName, String sellerLastName, BigDecimal price, int horsePower, String engine, String transmission, int year, int mileage, String description, String telephoneNumber) {
+    public OfferDetailsView(long id, String brand, String model, String picture, String sellerFirstName,String sellerLastName, BigDecimal price, int horsePower, String engine, String transmission, int year, int mileage, String description, String telephoneNumber) {
         this.id = id;
+        this.brand = brand;
+        this.model = model;
         this.picture = picture;
-        this.name = name;
         this.sellerFirstName = sellerFirstName;
         this.sellerLastName = sellerLastName;
-
         this.price = price;
         this.horsePower = horsePower;
         this.engine = engine;
@@ -48,8 +52,6 @@ public class OfferDetailsView {
         this.telephoneNumber = telephoneNumber;
     }
 
-    public OfferDetailsView() {
-    }
 
     public long getId() {
         return id;
@@ -57,6 +59,24 @@ public class OfferDetailsView {
 
     public void setId(long id) {
         this.id = id;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public OfferDetailsView setBrand(String brand) {
+        this.brand = brand;
+        return this;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public OfferDetailsView setModel(String model) {
+        this.model = model;
+        return this;
     }
 
     public String getPicture() {

@@ -5,7 +5,9 @@ import java.math.BigDecimal;
 public class AllOffersView {
     private Long id;
 
-    private String name;
+    private String brand;
+
+    private String model;
 
     private String picture;
 
@@ -13,9 +15,10 @@ public class AllOffersView {
 
     private String description;
 
-    public AllOffersView(Long id, String name, String picture, BigDecimal price, String description) {
+    public AllOffersView(Long id, String brand, String model, String picture, BigDecimal price, String description) {
         this.id = id;
-        this.name = name;
+        this.brand = brand;
+        this.model = model;
         this.picture = picture;
         this.price = price;
         this.description = description;
@@ -29,12 +32,22 @@ public class AllOffersView {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getBrand() {
+        return brand;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public AllOffersView setBrand(String brand) {
+        this.brand = brand;
+        return this;
+    }
+
+    public String getModel() {
+        return model;
+    }
+
+    public AllOffersView setModel(String model) {
+        this.model = model;
+        return this;
     }
 
     public String getPicture() {

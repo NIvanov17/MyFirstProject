@@ -19,8 +19,6 @@ public class OfferEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(nullable = false)
-    private String name;
 
     @ManyToOne
     private BrandEntity brand;
@@ -152,13 +150,5 @@ public class OfferEntity {
 
     public void setSeller(UserEntity seller) {
         this.seller = seller;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

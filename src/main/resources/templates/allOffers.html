@@ -23,7 +23,7 @@
                 <div class="card h-100" style="width: 18rem;">
                     <img th:src="@{${'data:image/jpg;base64, ' + offer.picture}}" alt="" class="card-img-top">
                     <div class="card-body">
-                        <h5 th:text="*{name}" class="card-title">VW GOLF II</h5>
+                        <h5 th:text="|*{brand.getName()} *{model.getName()}|" class="card-title">VW GOLF II</h5>
                         <p th:text="*{description}" class="card-text">Very good car!</p>
                         <h6 th:text="*{price}+'lv.'">15.000$</h6>
                         <a th:href="@{/offer/{id}(id = *{id})}" class="btn btn-outline-success">Read More</a>
