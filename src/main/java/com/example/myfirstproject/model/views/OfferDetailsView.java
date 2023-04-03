@@ -12,8 +12,6 @@ public class OfferDetailsView {
 
     private String picture;
 
-    private String name;
-
     private String sellerFirstName;
 
     private String sellerLastName;
@@ -87,13 +85,6 @@ public class OfferDetailsView {
         this.picture = picture;
     }
 
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
 
     public String getSellerFirstName() {
         return sellerFirstName;
