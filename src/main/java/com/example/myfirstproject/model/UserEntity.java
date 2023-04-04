@@ -40,43 +40,49 @@ public class UserEntity {
     private List<OfferEntity> likedOffers;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<UserRoleEntity> roles;
+    private List<UserRoleEntity> roles = new ArrayList<>();
+
+
 
 
     public UserEntity() {
-        this.roles = new ArrayList<>();
+
     }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public UserEntity setId(long id) {
         this.id = id;
+        return this;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public UserEntity setFirstName(String firstName) {
         this.firstName = firstName;
+        return this;
     }
 
     public String getLastName() {
         return lastName;
     }
 
-    public void setLastName(String lastName) {
+    public UserEntity setLastName(String lastName) {
         this.lastName = lastName;
+        return this;
     }
 
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(String username) {
+    public UserEntity setUsername(String username) {
         this.username = username;
+        return this;
     }
 
     public String getEmail() {
@@ -91,16 +97,18 @@ public class UserEntity {
         return password;
     }
 
-    public void setPassword(String password) {
+    public UserEntity setPassword(String password) {
         this.password = password;
+        return this;
     }
 
     public List<UserRoleEntity> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<UserRoleEntity> roles) {
+    public UserEntity setRoles(List<UserRoleEntity> roles) {
         this.roles = roles;
+        return this;
     }
 
     public String getTelephoneNumber() {

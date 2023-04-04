@@ -33,8 +33,9 @@ public class UserRoleEntity {
         return name;
     }
 
-    public void setRole(UserRoleEnum name) {
+    public UserRoleEntity setRole(UserRoleEnum name) {
         this.name = name;
+        return this;
     }
 
     @Override

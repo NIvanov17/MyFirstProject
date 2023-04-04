@@ -15,6 +15,7 @@ public class Bri4kaUserDetails implements UserDetails {
     private final String lastName;
     private final Collection<GrantedAuthority> authorities;
 
+
     public Bri4kaUserDetails(long id, String password, String username, String firstName, String lastName, Collection<GrantedAuthority> authorities) {
         this.id = id;
         this.password = password;
