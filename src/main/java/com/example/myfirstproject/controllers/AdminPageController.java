@@ -1,6 +1,6 @@
 package com.example.myfirstproject.controllers;
 
-import com.example.myfirstproject.model.DTOs.UsersDTO;
+import com.example.myfirstproject.model.DTOs.user.UsersDTO;
 import com.example.myfirstproject.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

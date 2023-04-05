@@ -23,23 +23,26 @@ public class ModelEntity {
         return id;
     }
 
-    public void setId(long id) {
+    public ModelEntity setId(long id) {
         this.id = id;
-    }
-
-    public BrandEntity getBrand() {
-        return brand;
-    }
-
-    public void setBrand(BrandEntity brand) {
-        this.brand = brand;
+        return this;
     }
 
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public ModelEntity setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public BrandEntity getBrand() {
+        return brand;
+    }
+
+    public ModelEntity setBrand(BrandEntity brand) {
+        this.brand = brand;
+        return this;
     }
 }

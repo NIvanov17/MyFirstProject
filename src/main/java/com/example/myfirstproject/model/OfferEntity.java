@@ -60,95 +60,107 @@ public class OfferEntity {
         return id;
     }
 
-    public void setId(long id) {
+    public OfferEntity setId(long id) {
         this.id = id;
+        return this;
     }
 
     public BrandEntity getBrand() {
         return brand;
     }
 
-    public void setBrand(BrandEntity brand) {
+    public OfferEntity setBrand(BrandEntity brand) {
         this.brand = brand;
+        return this;
     }
 
     public ModelEntity getModel() {
         return model;
     }
 
-    public void setModel(ModelEntity model) {
+    public OfferEntity setModel(ModelEntity model) {
         this.model = model;
+        return this;
     }
 
     public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public OfferEntity setPrice(BigDecimal price) {
         this.price = price;
+        return this;
     }
 
     public int getHorsePower() {
         return horsePower;
     }
 
-    public void setHorsePower(int horsePower) {
+    public OfferEntity setHorsePower(int horsePower) {
         this.horsePower = horsePower;
+        return this;
     }
 
     public EngineEnum getEngine() {
         return engine;
     }
 
-    public void setEngine(EngineEnum engine) {
+    public OfferEntity setEngine(EngineEnum engine) {
         this.engine = engine;
+        return this;
     }
 
     public TransmissionEnum getTransmission() {
         return transmission;
     }
 
-    public void setTransmission(TransmissionEnum transmission) {
+    public OfferEntity setTransmission(TransmissionEnum transmission) {
         this.transmission = transmission;
+        return this;
     }
 
     public int getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public OfferEntity setYear(int year) {
         this.year = year;
+        return this;
     }
 
     public int getMileage() {
         return mileage;
     }
 
-    public void setMileage(int mileage) {
+    public OfferEntity setMileage(int mileage) {
         this.mileage = mileage;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public OfferEntity setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public String getPicture() {
         return picture;
     }
 
-    public void setPicture(String picture) {
+    public OfferEntity setPicture(String picture) {
         this.picture = picture;
+        return this;
     }
 
     public UserEntity getSeller() {
         return seller;
     }
 
-    public void setSeller(UserEntity seller) {
+    public OfferEntity setSeller(UserEntity seller) {
         this.seller = seller;
+        return this;
     }
 }

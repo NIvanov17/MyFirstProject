@@ -89,8 +89,9 @@ public class UserEntity {
         return email;
     }
 
-    public void setEmail(String email) {
+    public UserEntity setEmail(String email) {
         this.email = email;
+        return this;
     }
 
     public String getPassword() {

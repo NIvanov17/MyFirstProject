@@ -1,6 +1,6 @@
 package com.example.myfirstproject.service;
 
-import com.example.myfirstproject.model.DTOs.UsersDTO;
+import com.example.myfirstproject.model.DTOs.user.UsersDTO;
 import com.example.myfirstproject.model.OfferEntity;
 import com.example.myfirstproject.model.UserEntity;
 import com.example.myfirstproject.model.UserRoleEntity;
@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 

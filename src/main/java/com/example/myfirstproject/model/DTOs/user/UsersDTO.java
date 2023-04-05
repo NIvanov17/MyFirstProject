@@ -1,4 +1,4 @@
-package com.example.myfirstproject.model.DTOs;
+package com.example.myfirstproject.model.DTOs.user;
 
 import com.example.myfirstproject.model.UserRoleEntity;
 

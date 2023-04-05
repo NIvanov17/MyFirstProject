@@ -1,6 +1,6 @@
 package com.example.myfirstproject.controllers;
 
-import com.example.myfirstproject.model.DTOs.UsersDTO;
+import com.example.myfirstproject.model.DTOs.user.UsersDTO;
 import com.example.myfirstproject.model.UserRoleEntity;
 import com.example.myfirstproject.service.RoleService;
 import com.example.myfirstproject.service.UserService;
@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
-import java.util.Optional;
 
 @Controller
 public class RolesController {

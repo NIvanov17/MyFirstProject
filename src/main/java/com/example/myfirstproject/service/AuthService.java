@@ -1,7 +1,7 @@
 package com.example.myfirstproject.service;
 
 
-import com.example.myfirstproject.model.DTOs.UserRegisterDTO;
+import com.example.myfirstproject.model.DTOs.user.UserRegisterDTO;
 import com.example.myfirstproject.model.UserEntity;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;

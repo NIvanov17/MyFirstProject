@@ -9,6 +9,7 @@ import com.example.myfirstproject.model.UserEntity;
 import com.example.myfirstproject.model.enums.EngineEnum;
 import com.example.myfirstproject.model.enums.TransmissionEnum;
 import com.example.myfirstproject.model.enums.UserRoleEnum;
+import com.example.myfirstproject.model.views.AllOffersView;
 import com.example.myfirstproject.model.views.OfferDetailsView;
 import com.example.myfirstproject.repository.BrandRepository;
 import com.example.myfirstproject.repository.ModelRepository;
@@ -23,6 +24,7 @@ import java.io.IOException;
 import java.security.Principal;
 import java.util.Base64;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class OfferService {
@@ -64,6 +66,15 @@ public class OfferService {
 
     public List<OfferEntity> getAllOffers() {
         return this.offerRepository.findAll();
+//                .stream()
+//                .map(o->new AllOffersView(
+//                        o.getId(),
+//                        o.getBrand().getName(),
+//                        o.getModel().getName(),
+//                        o.getPicture(),
+//                        o.getPrice(),
+//                        o.getDescription()
+//                )).collect(Collectors.toList());
 
     }
 
