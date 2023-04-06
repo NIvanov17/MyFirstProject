@@ -124,8 +124,9 @@ public class UserEntity {
         return likedOffers;
     }
 
-    public void setLikedOffers(List<OfferEntity> likedOffers) {
+    public UserEntity setLikedOffers(List<OfferEntity> likedOffers) {
         this.likedOffers = likedOffers;
+        return this;
     }
 
     public void addRole(UserRoleEntity role) {

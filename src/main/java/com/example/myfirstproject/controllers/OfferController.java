@@ -74,7 +74,6 @@ public class OfferController {
                                Model model, Principal principal) {
 
         OfferDetailsView offerDetails = offerService.getOfferDetails(id);
-        UserEntity user = userService.getUserByUsername(principal.getName());
 
         model.addAttribute("offer", offerDetails);
         model.addAttribute("canDelete", offerService.isOwner(id, principal));
@@ -86,16 +85,7 @@ public class OfferController {
     @GetMapping("/all-offers")
     public String allOffers(Model model, Principal principal) {
 
-        List<OfferEntity> allOffers = this.offerService.getAllOffers();
-
-        allOffers.stream().map(o -> new AllOffersView(
-                o.getId(),
-                o.getBrand().getName(),
-                o.getModel().getName(),
-                o.getPicture(),
-                o.getPrice(),
-                o.getDescription()
-        )).collect(Collectors.toList());
+        List<AllOffersView> allOffers = this.offerService.getAllOffers();
 
         model.addAttribute("allOffers", allOffers);
 
@@ -105,16 +95,9 @@ public class OfferController {
     @GetMapping("/liked-offers")
     public String likedOffers(Principal principal, Model model) {
 
-        List<OfferEntity> likedOffers = this.userService.getUserByUsername(principal.getName()).getLikedOffers();
+        UserEntity user = this.userService.getUserByUsername(principal.getName());
 
-        likedOffers.stream().map(l -> new AllOffersView(
-                l.getId(),
-                l.getBrand().getName(),
-                l.getModel().getName(),
-                l.getPicture(),
-                l.getPrice(),
-                l.getDescription()
-        )).collect(Collectors.toList());
+        List<AllOffersView> likedOffers = userService.getLikedOffers(user);
 
         model.addAttribute("likedOffers", likedOffers);
 

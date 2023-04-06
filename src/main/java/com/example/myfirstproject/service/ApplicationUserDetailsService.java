@@ -47,13 +47,7 @@ public class ApplicationUserDetailsService implements UserDetailsService {
         };
     }
 
-    public List<GrantedAuthority> extractAuthorities(UserEntity userEntity) {
-        return userEntity
-                .getRoles()
-                .stream()
-                .map(this::mapRole)
-                .toList();
-    }
+
 
     private GrantedAuthority mapRole(UserRoleEntity userRoleEntity) {
         return new SimpleGrantedAuthority("ROLE_" + userRoleEntity.getRole().name());

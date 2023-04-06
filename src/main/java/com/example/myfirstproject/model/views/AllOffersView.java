@@ -3,7 +3,7 @@ package com.example.myfirstproject.model.views;
 import java.math.BigDecimal;
 
 public class AllOffersView {
-    private Long id;
+    private long id;
 
     private String brand;
 
@@ -24,12 +24,16 @@ public class AllOffersView {
         this.description = description;
     }
 
+    public AllOffersView() {
+    }
+
     public Long getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public AllOffersView setId(long id) {
         this.id = id;
+        return this;
     }
 
     public String getBrand() {
@@ -54,23 +58,26 @@ public class AllOffersView {
         return picture;
     }
 
-    public void setPicture(String picture) {
+    public AllOffersView setPicture(String picture) {
         this.picture = picture;
+        return this;
     }
 
     public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public AllOffersView setPrice(BigDecimal price) {
         this.price = price;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public AllOffersView setDescription(String description) {
         this.description = description;
+        return this;
     }
 }

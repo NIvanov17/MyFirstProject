@@ -25,7 +25,7 @@ public class AdminPageController {
 
     @GetMapping("/admin/users/{id}")
     public ResponseEntity<UsersDTO> getUserById(@PathVariable("id") Long id) {
-        Optional<UsersDTO> user = this.userService.getUserById(id);
+        Optional<UsersDTO> user = this.userService.getUserDTO(id);
 
         return user.map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());

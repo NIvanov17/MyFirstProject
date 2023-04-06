@@ -6,6 +6,7 @@ import com.example.myfirstproject.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -46,9 +47,13 @@ public class RoleService {
 
     public List<UserRoleEntity> getMissingRoles(List<UserRoleEntity> roles) {
         List<UserRoleEntity> all = this.roleRepository.findAll();
+        List<UserRoleEntity> missing = new ArrayList<>();
 
-        return all.stream()
-                .filter(r -> !roles.contains(r))
-                .collect(Collectors.toList());
+        for (UserRoleEntity role : all) {
+            if(!roles.contains(role)){
+                missing.add(role);
+            }
+        }
+        return missing;
     }
 }

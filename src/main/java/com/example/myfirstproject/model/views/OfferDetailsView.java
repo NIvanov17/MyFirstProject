@@ -32,8 +32,10 @@ public class OfferDetailsView {
 
     private String telephoneNumber;
 
+    public OfferDetailsView() {
+    }
 
-    public OfferDetailsView(long id, String brand, String model, String picture, String sellerFirstName,String sellerLastName, BigDecimal price, int horsePower, String engine, String transmission, int year, int mileage, String description, String telephoneNumber) {
+    public OfferDetailsView(long id, String brand, String model, String picture, String sellerFirstName, String sellerLastName, BigDecimal price, int horsePower, String engine, String transmission, int year, int mileage, String description, String telephoneNumber) {
         this.id = id;
         this.brand = brand;
         this.model = model;
@@ -55,8 +57,9 @@ public class OfferDetailsView {
         return id;
     }
 
-    public void setId(long id) {
+    public OfferDetailsView setId(long id) {
         this.id = id;
+        return this;
     }
 
     public String getBrand() {
@@ -81,89 +84,98 @@ public class OfferDetailsView {
         return picture;
     }
 
-    public void setPicture(String picture) {
+    public OfferDetailsView setPicture(String picture) {
         this.picture = picture;
+        return this;
     }
-
 
     public String getSellerFirstName() {
         return sellerFirstName;
     }
 
-    public void setSellerFirstName(String sellerFirstName) {
+    public OfferDetailsView setSellerFirstName(String sellerFirstName) {
         this.sellerFirstName = sellerFirstName;
+        return this;
     }
 
     public String getSellerLastName() {
         return sellerLastName;
     }
 
-    public void setSellerLastName(String sellerLastName) {
+    public OfferDetailsView setSellerLastName(String sellerLastName) {
         this.sellerLastName = sellerLastName;
+        return this;
     }
 
     public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public OfferDetailsView setPrice(BigDecimal price) {
         this.price = price;
+        return this;
     }
-
 
     public int getHorsePower() {
         return horsePower;
     }
 
-    public void setHorsePower(int horsePower) {
+    public OfferDetailsView setHorsePower(int horsePower) {
         this.horsePower = horsePower;
+        return this;
     }
 
     public String getEngine() {
         return engine;
     }
 
-    public void setEngine(String engine) {
+    public OfferDetailsView setEngine(String engine) {
         this.engine = engine;
+        return this;
     }
 
     public String getTransmission() {
         return transmission;
     }
 
-    public void setTransmission(String transmission) {
+    public OfferDetailsView setTransmission(String transmission) {
         this.transmission = transmission;
+        return this;
     }
 
     public int getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public OfferDetailsView setYear(int year) {
         this.year = year;
+        return this;
     }
 
     public int getMileage() {
         return mileage;
     }
 
-    public void setMileage(int mileage) {
+    public OfferDetailsView setMileage(int mileage) {
         this.mileage = mileage;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public OfferDetailsView setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public String getTelephoneNumber() {
         return telephoneNumber;
     }
 
-    public void setTelephoneNumber(String telephoneNumber) {
+    public OfferDetailsView setTelephoneNumber(String telephoneNumber) {
         this.telephoneNumber = telephoneNumber;
+        return this;
     }
 }

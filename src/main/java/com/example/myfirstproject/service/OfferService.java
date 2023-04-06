@@ -1,7 +1,6 @@
 package com.example.myfirstproject.service;
 
 
-import com.example.myfirstproject.model.BrandEntity;
 import com.example.myfirstproject.model.DTOs.offer.AddOfferDTO;
 import com.example.myfirstproject.model.ModelEntity;
 import com.example.myfirstproject.model.OfferEntity;
@@ -64,17 +63,17 @@ public class OfferService {
         this.offerRepository.save(offer);
     }
 
-    public List<OfferEntity> getAllOffers() {
-        return this.offerRepository.findAll();
-//                .stream()
-//                .map(o->new AllOffersView(
-//                        o.getId(),
-//                        o.getBrand().getName(),
-//                        o.getModel().getName(),
-//                        o.getPicture(),
-//                        o.getPrice(),
-//                        o.getDescription()
-//                )).collect(Collectors.toList());
+    public List<AllOffersView> getAllOffers() {
+        return this.offerRepository.findAll()
+                .stream()
+                .map(o -> new AllOffersView(
+                        o.getId(),
+                        o.getBrand().getName(),
+                        o.getModel().getName(),
+                        o.getPicture(),
+                        o.getPrice(),
+                        o.getDescription()
+                )).collect(Collectors.toList());
 
     }
 

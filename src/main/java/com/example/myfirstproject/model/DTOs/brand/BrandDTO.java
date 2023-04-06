@@ -11,13 +11,13 @@ public class BrandDTO {
 
     private String name;
 
-    private List<ModelDTO> models;
+    private List<ModelDTO> models = new ArrayList<>();
 
     public String getName() {
         return name;
     }
 
-    public BrandDTO setId(Long id) {
+    public BrandDTO setId(long id) {
         this.id = id;
         return this;
     }
@@ -41,12 +41,4 @@ public class BrandDTO {
         return id;
     }
 
-
-    public BrandDTO addModel(ModelDTO model) {
-        if (this.models == null) {
-            this.models = new ArrayList<>();
-        }
-        this.models.add(model);
-        return this;
-    }
 }

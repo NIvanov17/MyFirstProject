@@ -9,10 +9,10 @@ import java.math.BigDecimal;
 public class AddOfferDTO {
 
     @NotNull
-    private Long brand;
+    private long brand;
 
     @NotNull
-    private Long model;
+    private long model;
 
 
     @NotNull
@@ -61,7 +61,7 @@ public class AddOfferDTO {
         return brand;
     }
 
-    public AddOfferDTO setBrand(Long brand) {
+    public AddOfferDTO setBrand(long brand) {
         this.brand = brand;
         return this;
     }
@@ -70,73 +70,80 @@ public class AddOfferDTO {
         return model;
     }
 
-    public void setModel(Long model) {
+    public AddOfferDTO setModel(long model) {
         this.model = model;
+        return this;
     }
-
 
     public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(BigDecimal price) {
+    public AddOfferDTO setPrice(BigDecimal price) {
         this.price = price;
+        return this;
     }
 
     public int getHorsePower() {
         return horsePower;
     }
 
-    public void setHorsePower(int horsePower) {
+    public AddOfferDTO setHorsePower(int horsePower) {
         this.horsePower = horsePower;
+        return this;
     }
 
     public String getEngine() {
         return engine;
     }
 
-    public void setEngine(String engine) {
+    public AddOfferDTO setEngine(String engine) {
         this.engine = engine;
+        return this;
     }
 
     public String getTransmission() {
         return transmission;
     }
 
-    public void setTransmission(String transmission) {
+    public AddOfferDTO setTransmission(String transmission) {
         this.transmission = transmission;
+        return this;
     }
 
     public int getYear() {
         return year;
     }
 
-    public void setYear(int year) {
+    public AddOfferDTO setYear(int year) {
         this.year = year;
+        return this;
     }
 
     public int getMileage() {
         return mileage;
     }
 
-    public void setMileage(int mileage) {
+    public AddOfferDTO setMileage(int mileage) {
         this.mileage = mileage;
+        return this;
     }
 
     public String getDescription() {
         return description;
     }
 
-    public void setDescription(String description) {
+    public AddOfferDTO setDescription(String description) {
         this.description = description;
+        return this;
     }
 
     public String getPicture() {
         return picture;
     }
 
-    public void setPicture(String picture) {
+    public AddOfferDTO setPicture(String picture) {
         this.picture = picture;
+        return this;
     }
-
 }

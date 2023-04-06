@@ -5,6 +5,7 @@ import com.example.myfirstproject.model.OfferEntity;
 import com.example.myfirstproject.model.UserEntity;
 import com.example.myfirstproject.model.UserRoleEntity;
 import com.example.myfirstproject.model.enums.UserRoleEnum;
+import com.example.myfirstproject.model.views.AllOffersView;
 import com.example.myfirstproject.repository.OfferRepository;
 import com.example.myfirstproject.repository.UserRepository;
 import org.modelmapper.ModelMapper;
@@ -105,7 +106,7 @@ public class UserService {
                 .collect(Collectors.toList());
     }
 
-    public Optional<UsersDTO> getUserById(Long id) {
+    public Optional<UsersDTO> getUserDTOById(Long id) {
         return this.userRepository.findById(id)
                 .map(u -> this.modelMapper.map(u, UsersDTO.class));
     }
@@ -114,8 +115,17 @@ public class UserService {
         this.userRepository.deleteById(id);
     }
 
-    public List<OfferEntity> getLikedOffers(UserEntity currentUser) {
-        return currentUser.getLikedOffers();
+    public List<AllOffersView> getLikedOffers(UserEntity currentUser) {
+        return currentUser.getLikedOffers()
+                .stream()
+                .map(l -> new AllOffersView(
+                        l.getId(),
+                        l.getBrand().getName(),
+                        l.getModel().getName(),
+                        l.getPicture(),
+                        l.getPrice(),
+                        l.getDescription()
+                )).collect(Collectors.toList());
     }
 
 

@@ -29,7 +29,7 @@
         <td>
             <a th:each="r: ${missingRoles}" th:object="${r}"
                th:href="@{/admin/addRole/{id}/{id2}(id = *{id}, id2 = ${userDTO.id})}" class="btn btn-dark m-2"
-               th:text="|ADD ROLE|"></a>
+               th:text="|ADD ROLE |"></a>
 
         </td>
 
