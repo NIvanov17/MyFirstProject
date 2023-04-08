@@ -67,11 +67,6 @@
                         </li>
 
 
-<!--                        <li class="nav-item" sec:authorize="isAuthenticated()">-->
-<!--                            <form id="myLogoutForm" style="color: black" th:action="@{/logout}" th:method="post">-->
-<!--                            <a onclick="document.getElementById('myLogoutForm').submit();" sec:authorize="isAuthenticated()"-->
-<!--                               class="nav-link text-white active h5">LOGOUT</a>-->
-<!--                            </form>-->
                             <form th:method="POST" th:action="@{/logout}" sec:authorize="isAuthenticated()">
                                 <input class="btn btn-light " type="submit" value="LOG OUT">
                             </form>

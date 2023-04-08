@@ -24,7 +24,6 @@ function loadUsers() {
             for(let role in user.roles){
                     resultRoles = resultRoles + role + " ";
             }
-            // user.roles.forEach(r => resultRoles = resultRoles + r.toString() + " ")
 
             currentRoles.textContent = resultRoles;
 
@@ -54,10 +53,4 @@ function loadUsers() {
 
         }))
 
-        // async function onAddRoleBtn(event) {
-        //         let username = event.currentTarget.getAttribute('id');
-        //
-        //         window.location.replace(`http://localhost:8080/admin/addRole/{id}`);
-        //
-        // }
 }
