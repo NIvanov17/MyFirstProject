@@ -10,6 +10,8 @@ import com.example.myfirstproject.service.OfferService;
 import com.example.myfirstproject.service.UserService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -83,11 +85,12 @@ public class OfferController {
     }
 
     @GetMapping("/all-offers")
-    public String allOffers(Model model, Principal principal) {
+    public String allOffers(Model model, Principal principal,
+                            @PageableDefault(page = 0,size = 4) Pageable pageable) {
 
-        List<AllOffersView> allOffers = this.offerService.getAllOffers();
+        this.offerService.getAllOffers(pageable);
 
-        model.addAttribute("allOffers", allOffers);
+        model.addAttribute("allOffers",this.offerService.getAllOffers(pageable));
 
         return "allOffers";
     }

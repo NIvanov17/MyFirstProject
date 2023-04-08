@@ -2,8 +2,6 @@ package com.example.myfirstproject.model;
 
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
 
 
 import java.util.ArrayList;
@@ -40,7 +38,7 @@ public class UserEntity {
     private List<OfferEntity> likedOffers;
 
     @ManyToMany(fetch = FetchType.EAGER)
-    private List<UserRoleEntity> roles = new ArrayList<>();
+    private List<RoleEntity> roles = new ArrayList<>();
 
 
 
@@ -103,11 +101,11 @@ public class UserEntity {
         return this;
     }
 
-    public List<UserRoleEntity> getRoles() {
+    public List<RoleEntity> getRoles() {
         return roles;
     }
 
-    public UserEntity setRoles(List<UserRoleEntity> roles) {
+    public UserEntity setRoles(List<RoleEntity> roles) {
         this.roles = roles;
         return this;
     }
@@ -129,11 +127,11 @@ public class UserEntity {
         return this;
     }
 
-    public void addRole(UserRoleEntity role) {
+    public void addRole(RoleEntity role) {
         this.roles.add(role);
     }
 
-    public void removeRole(UserRoleEntity role) {
+    public void removeRole(RoleEntity role) {
         this.roles.remove(role);
     }
 

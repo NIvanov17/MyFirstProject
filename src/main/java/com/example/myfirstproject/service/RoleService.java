@@ -1,16 +1,15 @@
 package com.example.myfirstproject.service;
 
-import com.example.myfirstproject.model.UserRoleEntity;
+import com.example.myfirstproject.model.RoleEntity;
+import com.example.myfirstproject.model.UserEntity;
 import com.example.myfirstproject.model.enums.UserRoleEnum;
 import com.example.myfirstproject.repository.RoleRepository;
 import org.springframework.stereotype.Service;
 
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class RoleService {
@@ -26,34 +25,37 @@ public class RoleService {
         if (roleRepository.count() == 0) {
 
             Arrays.stream(UserRoleEnum.values()).forEach(role -> {
-                UserRoleEntity currentRole = new UserRoleEntity();
-                currentRole.setRole(role);
+                RoleEntity currentRole = new RoleEntity();
+                currentRole.setName(role);
                 this.roleRepository.saveAndFlush(currentRole);
             });
         }
     }
 
-    public Optional<UserRoleEntity> getRoleById(Long id){
+    public Optional<RoleEntity> getRoleById(Long id) {
         return this.roleRepository.findById(id);
     }
 
-    public UserRoleEntity findAdminRoleByName(UserRoleEnum admin) {
+    public RoleEntity findAdminRoleByName(UserRoleEnum admin) {
         return roleRepository.findRoleByName(UserRoleEnum.ADMIN);
     }
 
-    public UserRoleEntity findUserRoleByName(UserRoleEnum user) {
+    public RoleEntity findUserRoleByName(UserRoleEnum user) {
         return roleRepository.findRoleByName(UserRoleEnum.USER);
     }
 
-    public List<UserRoleEntity> getMissingRoles(List<UserRoleEntity> roles) {
-        List<UserRoleEntity> all = this.roleRepository.findAll();
-        List<UserRoleEntity> missing = new ArrayList<>();
+    public List<RoleEntity> getMissingRoles(UserEntity user) {
+        List<RoleEntity> all = this.roleRepository.findAll();
+        List<RoleEntity> currentRoles = user.getRoles();
+        all.removeAll(currentRoles);
+        return all;
+    }
 
-        for (UserRoleEntity role : all) {
-            if(!roles.contains(role)){
-                missing.add(role);
-            }
-        }
-        return missing;
+    public RoleEntity getRoleByName(UserRoleEnum role) {
+        return this.roleRepository.findRoleByName(role);
+    }
+
+    public List<RoleEntity> getRolesToRemove(UserEntity user) {
+       return user.getRoles();
     }
 }

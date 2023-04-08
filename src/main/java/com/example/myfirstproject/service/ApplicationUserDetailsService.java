@@ -1,7 +1,7 @@
 package com.example.myfirstproject.service;
 
 import com.example.myfirstproject.model.UserEntity;
-import com.example.myfirstproject.model.UserRoleEntity;
+import com.example.myfirstproject.model.RoleEntity;
 import com.example.myfirstproject.model.entities.Bri4kaUserDetails;
 import com.example.myfirstproject.repository.UserRepository;
 
@@ -12,9 +12,6 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-
-
-import java.util.List;
 
 
 public class ApplicationUserDetailsService implements UserDetailsService {
@@ -49,7 +46,7 @@ public class ApplicationUserDetailsService implements UserDetailsService {
 
 
 
-    private GrantedAuthority mapRole(UserRoleEntity userRoleEntity) {
-        return new SimpleGrantedAuthority("ROLE_" + userRoleEntity.getRole().name());
+    private GrantedAuthority mapRole(RoleEntity userRoleEntity) {
+        return new SimpleGrantedAuthority("ROLE_" + userRoleEntity.getName().name());
     }
 }

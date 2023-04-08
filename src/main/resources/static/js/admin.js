@@ -29,13 +29,21 @@ function loadUsers() {
             currentRoles.textContent = resultRoles;
 
             let rolesCol = document.createElement('td');
-            let changeRolesBtn = document.createElement('a')
-            changeRolesBtn.classList.add("btn");
-            changeRolesBtn.classList.add("btn-dark");
-            changeRolesBtn.innerText = "Change Roles";
-            changeRolesBtn.href = `/admin/change/${user.id}`;
+            let addRoleBtn = document.createElement('a')
+            addRoleBtn.classList.add("btn");
+            addRoleBtn.classList.add("btn-dark");
+            addRoleBtn.innerText = "Add Role";
+            addRoleBtn.href = `/admin/addRole/${user.id}`;
 
-            rolesCol.appendChild(changeRolesBtn);
+                let rolesCols = document.createElement('td');
+                let removeRoleBtn = document.createElement('a')
+                removeRoleBtn.classList.add("btn");
+                removeRoleBtn.classList.add("btn-dark");
+                removeRoleBtn.innerText = "Remove Role";
+                removeRoleBtn.href = `/admin/removeRole/${user.id}`;
+
+            rolesCol.appendChild(addRoleBtn);
+            rolesCol.appendChild(removeRoleBtn);
 
             row.appendChild(idCol);
             row.appendChild(usernameCol);
@@ -45,4 +53,11 @@ function loadUsers() {
             usersTable.appendChild(row);
 
         }))
+
+        // async function onAddRoleBtn(event) {
+        //         let username = event.currentTarget.getAttribute('id');
+        //
+        //         window.location.replace(`http://localhost:8080/admin/addRole/{id}`);
+        //
+        // }
 }

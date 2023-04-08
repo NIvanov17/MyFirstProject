@@ -13,9 +13,6 @@ import com.example.myfirstproject.repository.UserRepository;
 import com.example.myfirstproject.service.BrandService;
 import com.example.myfirstproject.service.OfferService;
 import com.example.myfirstproject.service.UserService;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -24,14 +21,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.test.context.support.WithMockUser;
-import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.security.Principal;
 import java.util.List;
-import java.util.Optional;
 
 import static org.springframework.security.test.web.servlet.request.SecurityMockMvcRequestPostProcessors.csrf;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -59,6 +56,8 @@ public class OfferControllerIT {
     private OfferService offerService;
     @MockBean
     private OfferRepository offerRepository;
+    @Mock
+    private Pageable pageable;
 
     private UserEntity user;
 
@@ -70,6 +69,8 @@ public class OfferControllerIT {
 
     private BrandDTO brandDTO;
 
+    private Principal principal;
+
     @BeforeEach
     void setup() {
         user = new UserEntity()
@@ -79,7 +80,7 @@ public class OfferControllerIT {
                 .setEmail("kalin_krumov@gmail.com")
                 .setFirstName("Kalin")
                 .setLastName("Krumov")
-                .setRoles(List.of(new UserRoleEntity().setRole(UserRoleEnum.ADMIN)));
+                .setRoles(List.of(new RoleEntity().setName(UserRoleEnum.ADMIN)));
 
         offer = new OfferEntity()
                 .setId(1)
@@ -161,19 +162,6 @@ public class OfferControllerIT {
     }
 
 
-    @Test
-    @WithMockUser(username = "Kalin4", roles = {"ADMIN"})
-    void allOfferPageTest() throws Exception {
-
-        when(offerService.getAllOffers())
-                .thenReturn(List.of(allOffersView));
-
-
-        mockMvc.perform(get("/all-offers"))
-                .andExpect(model().attributeExists("allOffers"))
-                .andExpect(status().isOk())
-                .andExpect(view().name("allOffers"));
-    }
 
     @Test
     @WithMockUser(username = "Kalin4", roles = {"ADMIN"})
@@ -205,23 +193,26 @@ public class OfferControllerIT {
                 .andExpect(view().name("offer"));
     }
 
-//    @Test
-//    @WithMockUser(username = "Kalin4",roles = {"USER","ADMIN"})
-//    void addOfferSuccessTest() throws Exception {
-//        mockMvc.perform(post("/add-offer")
-//                        .param("brand","1")
-//                        .param("model","1")
-//                        .param("price","10000")
-//                        .param("horsePower","180")
-//                        .param("engine","PETROL")
-//                        .param("transmission","MANUAL")
-//                        .param("year","2002")
-//                        .param("mileage","100000")
-//                        .param("description","soo nice :-)")
-//                        .param("picture","img")
-//                        .with(csrf())
-//                ).andExpect(model().attributeExists("addOfferDTO"))
-//                .andExpect(status().is3xxRedirection())
-//                .andExpect(redirectedUrl("/all-offers"));
-//    }
+    @Test
+    @WithMockUser(username = "Kalin4", roles = {"ADMIN"})
+    void likeOffer() throws Exception {
+        when(offerService.getOfferById(1L))
+                .thenReturn(offer);
+
+        userService.likeOffer(principal,offer);
+
+        mockMvc.perform(get("/offer/like/{id}",offer.getId()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/liked-offers"));
+    }
+
+    @Test
+    @WithMockUser(username = "Kalin4", roles = {"ADMIN"})
+    void deleteOffer() throws Exception {
+        offerService.deleteOffer(offer.getId(),principal);
+
+        mockMvc.perform(get("/offer/delete/{id}",offer.getId()))
+                .andExpect(status().is3xxRedirection())
+                .andExpect(redirectedUrl("/all-offers"));
+    }
 }

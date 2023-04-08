@@ -1,13 +1,19 @@
 package com.example.myfirstproject.controllers;
 
-import com.example.myfirstproject.model.DTOs.user.UsersDTO;
-import com.example.myfirstproject.model.UserRoleEntity;
+import com.example.myfirstproject.model.DTOs.roles.RoleDTO;
+import com.example.myfirstproject.model.RoleEntity;
+import com.example.myfirstproject.model.UserEntity;
 import com.example.myfirstproject.service.RoleService;
 import com.example.myfirstproject.service.UserService;
+import jakarta.validation.Valid;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.List;
 
@@ -23,37 +29,71 @@ public class RolesController {
         this.roleService = roleService;
     }
 
-    @GetMapping("/admin/change/{id}")
+    @GetMapping("/admin/addRole/{id}")
     public String changeRoles(@PathVariable("id") Long id,
                               Model model) {
-        UsersDTO userDTO = this.userService.getUserDTO(id).get();
-        List<UserRoleEntity> roles = userDTO.getRoles();
-        List<UserRoleEntity> missingRoles = this.roleService.getMissingRoles(roles);
+        RoleDTO userModel = this.userService.getAddRoleDTO(id).get();
+        UserEntity user = this.userService.getUserById(id).get();
+        List<RoleEntity> missingRoles = this.roleService.getMissingRoles(user);
 
-        model.addAttribute("userDTO", userDTO);
-        model.addAttribute("roles", roles);
+        model.addAttribute("userModel", userModel);
         model.addAttribute("missingRoles", missingRoles);
 
-        return "changeRoles";
+        return "addRole";
 
     }
 
-    @GetMapping("/admin/addRole/{id}/{id2}")
-    public String addRole(@PathVariable("id") Long roleId,
-                          @PathVariable("id2") Long userID) {
+    @PostMapping("/admin/addRole/{id}")
+    public String addRole(@PathVariable("id") Long id,
+                          @Valid RoleDTO userModel,
+                          BindingResult bindingResult,
+                          RedirectAttributes redirectAttributes) {
 
-        this.userService.addRole(roleId, userID);
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userModel", userModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userModel", bindingResult);
 
-        return "adminPage";
+            return "redirect:/admin/addRole/{id}";
+        }
+        this.userService.addRole(id, userModel);
+        return "redirect:/home";
     }
 
-    @GetMapping("/admin/removeRole/{id}/{id2}")
-    public String removeRole(@PathVariable("id") Long roleId,
-                             @PathVariable("id2") Long userId) {
+    @GetMapping("/admin/removeRole/{id}")
+    public String removeRole(@PathVariable("id") Long id,
+                             Model model) {
+        RoleDTO userModel = this.userService.getAddRoleDTO(id).get();
+        UserEntity user = this.userService.getUserById(id).get();
+        List<RoleEntity> toRemove = this.roleService.getRolesToRemove(user);
 
-        this.userService.removeRole(roleId,userId);
+        model.addAttribute("userModel", userModel);
+        model.addAttribute("toRemove", toRemove);
 
-        return "adminPage";
+        return "removeRole";
+    }
+
+    @PostMapping("/admin/removeRole/{id}")
+    public String removeRole(@PathVariable("id") Long id,
+                             @Valid RoleDTO userModel,
+                             BindingResult bindingResult,
+                             RedirectAttributes redirectAttributes) {
+
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("userModel", userModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userModel", bindingResult);
+
+            return "redirect:/admin/addRole/{id}";
+        }
+        if (this.userService.removeRole(id, userModel)) {
+            return "redirect:/home";
+        }
+        return "redirect:/admin/removeRole/{id}";
+    }
+
+
+    @ModelAttribute
+    public RoleDTO userModel() {
+        return new RoleDTO();
     }
 
 }

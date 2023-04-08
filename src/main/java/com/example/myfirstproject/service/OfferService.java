@@ -16,6 +16,8 @@ import com.example.myfirstproject.repository.OfferRepository;
 import com.example.myfirstproject.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -63,9 +65,8 @@ public class OfferService {
         this.offerRepository.save(offer);
     }
 
-    public List<AllOffersView> getAllOffers() {
-        return this.offerRepository.findAll()
-                .stream()
+    public Page<AllOffersView> getAllOffers(Pageable pageable) {
+        return this.offerRepository.findAll(pageable)
                 .map(o -> new AllOffersView(
                         o.getId(),
                         o.getBrand().getName(),
@@ -73,7 +74,7 @@ public class OfferService {
                         o.getPicture(),
                         o.getPrice(),
                         o.getDescription()
-                )).collect(Collectors.toList());
+                ));
 
     }
 
@@ -147,6 +148,6 @@ public class OfferService {
     public boolean isAdmin(UserEntity user) {
         return user.getRoles()
                 .stream()
-                .anyMatch(r -> r.getRole() == UserRoleEnum.ADMIN);
+                .anyMatch(r -> r.getName() == UserRoleEnum.ADMIN);
     }
 }

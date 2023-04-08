@@ -38,13 +38,24 @@
 
 
 <nav aria-label="pagination">
-    <div class="fixed-bottom">
+    <div class="container-fluid container-fluid row justify-content-center fixed-bottom m-md-5">
         <ul class="pagination">
-            <li class="page-item"><a class="page-link" href="#">Previous</a></li>
-            <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item"><a class="page-link" href="#">2</a></li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li>
-            <li class="page-item"><a class="page-link" href="#">Next</a></li>
+            <li class="page-item" th:classappend="${allOffers.isFirst()} ? 'disabled' : ''">
+                <a class="page-link" th:unless="${allOffers.isFirst()}"
+                   th:href="@{/all-offers(size=${allOffers.getSize()},page=0)}">First</a>
+            </li>
+            <li class="page-item" th:classappend="${allOffers.hasPrevious() ? '' : 'disabled'}">
+                <a class="page-link" th:if="${allOffers.hasPrevious()}"
+                   th:href="@{/all-offers(size=${allOffers.getSize()},page=${allOffers.getNumber() - 1})}">Previous</a>
+            </li>
+            <li class="page-item" th:classappend="${allOffers.hasNext() ? '' : 'disabled'}">
+                <a class="page-link" th:if="${allOffers.hasNext()}"
+                   th:href="@{/all-offers(size=${allOffers.getSize()},page=${allOffers.getNumber() + 1})}">Next</a>
+            </li>
+            <li class="page-item" th:classappend="${allOffers.isLast()} ? 'disabled' : ''">
+                <a class="page-link" th:unless="${allOffers.isLast()}"
+                   th:href="@{/all-offers(size=${allOffers.getSize()},page=${allOffers.getTotalPages() - 1})}">Last</a>
+            </li>
         </ul>
     </div>
 </nav>

@@ -4,7 +4,7 @@ import com.example.myfirstproject.model.UserEntity;
 
 import static org.mockito.Mockito.when;
 
-import com.example.myfirstproject.model.UserRoleEntity;
+import com.example.myfirstproject.model.RoleEntity;
 import com.example.myfirstproject.model.enums.UserRoleEnum;
 import com.example.myfirstproject.repository.UserRepository;
 import org.junit.jupiter.api.Assertions;
@@ -45,7 +45,7 @@ public class ApplicationUserDetailsTest {
                 .setFirstName("Kalin")
                 .setLastName("Krumov")
                 .setRoles(
-                        List.of(new UserRoleEntity().setRole(UserRoleEnum.ADMIN))
+                        List.of(new RoleEntity().setName(UserRoleEnum.ADMIN))
                 );
 
         when(mockUserRepository.findByUsername("Kalin4"))

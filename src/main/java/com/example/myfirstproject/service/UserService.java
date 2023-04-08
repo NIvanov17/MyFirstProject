@@ -1,13 +1,15 @@
 package com.example.myfirstproject.service;
 
+import com.example.myfirstproject.model.DTOs.roles.RoleDTO;
 import com.example.myfirstproject.model.DTOs.user.UsersDTO;
 import com.example.myfirstproject.model.OfferEntity;
 import com.example.myfirstproject.model.UserEntity;
-import com.example.myfirstproject.model.UserRoleEntity;
+import com.example.myfirstproject.model.RoleEntity;
 import com.example.myfirstproject.model.enums.UserRoleEnum;
 import com.example.myfirstproject.model.views.AllOffersView;
 import com.example.myfirstproject.repository.OfferRepository;
 import com.example.myfirstproject.repository.UserRepository;
+import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -40,9 +42,9 @@ public class UserService {
         if (userRepository.count() == 0) {
             UserEntity adminUser = new UserEntity();
 
-            UserRoleEntity userRoleEntity = roleService.findAdminRoleByName(UserRoleEnum.ADMIN);
+            RoleEntity userRoleEntity = roleService.findAdminRoleByName(UserRoleEnum.ADMIN);
 
-            List<UserRoleEntity> roles = new ArrayList<>();
+            List<RoleEntity> roles = new ArrayList<>();
             roles.add(userRoleEntity);
 
             adminUser.setUsername("Kalin4");
@@ -69,7 +71,7 @@ public class UserService {
 
     public void register(UserEntity user) {
 
-        UserRoleEntity roleByName = this.roleService.findUserRoleByName(UserRoleEnum.USER);
+        RoleEntity roleByName = this.roleService.findUserRoleByName(UserRoleEnum.USER);
         user.setRoles(List.of(roleByName));
 
         this.userRepository.save(user);
@@ -152,18 +154,48 @@ public class UserService {
                 .map(u -> modelMapper.map(u, UsersDTO.class));
     }
 
-    public void addRole(Long roleId, Long userID) {
+    public void addRole(Long id, @Valid RoleDTO addRoleDTO) {
 
-        UserEntity userById = this.userRepository.findById(userID).get();
-        UserRoleEntity roleById = this.roleService.getRoleById(roleId).get();
+        UserEntity userById = this.userRepository.findById(id).get();
+        List<RoleEntity> currentRoles = userById.getRoles();
+        RoleEntity role = this.roleService.getRoleByName(UserRoleEnum.valueOf(addRoleDTO.getRole()));
 
-        userById.addRole(roleById);
+
+            currentRoles.add(role);
+            userById.setRoles(currentRoles);
+            this.userRepository.save(userById);
+
+
     }
 
-    public void removeRole(Long roleId, Long userId) {
-        UserEntity userEntity = this.userRepository.findById(userId).get();
-        UserRoleEntity roleById = this.roleService.getRoleById(roleId).get();
 
-        userEntity.removeRole(roleById);
+    public Optional<RoleDTO> getAddRoleDTO(Long id) {
+        return this.userRepository.findById(id)
+                .map(u -> modelMapper.map(u, RoleDTO.class));
+    }
+
+    public Optional<UserEntity> getUserById(Long id) {
+        return this.userRepository.findById(id);
+    }
+
+    public boolean removeRole(Long id, @Valid RoleDTO userModel) {
+
+        UserEntity user = this.userRepository.findById(id).get();
+
+        if (user.getRoles().size() <= 1) {
+            return false;
+        }
+        List<RoleEntity> userRoles = user.getRoles();
+        RoleEntity toRemove = this.roleService.getRoleByName(UserRoleEnum.valueOf(userModel.getRole()));
+
+        RoleEntity role = userRoles.stream()
+                .filter(r -> r.getName().name().equals(toRemove.getName().name()))
+                .findFirst()
+                .get();
+
+        userRoles.remove(role);
+        user.setRoles(userRoles);
+        this.userRepository.save(user);
+        return true;
     }
 }

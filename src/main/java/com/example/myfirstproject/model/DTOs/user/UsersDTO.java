@@ -1,6 +1,6 @@
 package com.example.myfirstproject.model.DTOs.user;
 
-import com.example.myfirstproject.model.UserRoleEntity;
+import com.example.myfirstproject.model.RoleEntity;
 
 import java.util.List;
 
@@ -10,7 +10,7 @@ public class UsersDTO {
 
     private String username;
 
-    private List<UserRoleEntity> roles;
+    private List<RoleEntity> roles;
 
     public UsersDTO() {
     }
@@ -31,11 +31,11 @@ public class UsersDTO {
         this.username = username;
     }
 
-    public List<UserRoleEntity> getRoles() {
+    public List<RoleEntity> getRoles() {
         return roles;
     }
 
-    public void setRoles(List<UserRoleEntity> roles) {
+    public void setRoles(List<RoleEntity> roles) {
         this.roles = roles;
     }
 
