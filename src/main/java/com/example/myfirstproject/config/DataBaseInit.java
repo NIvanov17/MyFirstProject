@@ -10,9 +10,6 @@ import org.springframework.stereotype.Component;
 public class DataBaseInit implements CommandLineRunner {
 
     private final RoleService roleService;
-
-
-
     private final UserService userService;
 
     public DataBaseInit(RoleService roleService,  UserService userService) {

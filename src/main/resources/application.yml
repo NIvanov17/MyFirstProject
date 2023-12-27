@@ -17,7 +17,7 @@ spring:
         enabled: 'true'
   datasource:
     driverClassName: com.mysql.cj.jdbc.Driver
-    password: 'Parola.123'
+    password:
     username: 'root'
     url: jdbc:mysql://localhost:3306/MyProject?allowPublicKeyRetrieval=true&useSSL=false&createDatabaseIfNotExist=true&serverTimezone=UTC
 logging:

@@ -27,18 +27,16 @@ public class RoleEntity {
         return id;
     }
 
-    public RoleEntity setId(long id) {
+    public void setId(long id) {
         this.id = id;
-        return this;
     }
 
     public UserRoleEnum getName() {
         return name;
     }
 
-    public RoleEntity setName(UserRoleEnum name) {
+    public void setName(UserRoleEnum name) {
         this.name = name;
-        return this;
     }
 
     @Override

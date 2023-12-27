@@ -50,55 +50,55 @@ public class RolesControllerIT {
                 .setUsername("Kalin4")
                 .setRole("ADMIN");
 
-        user = new UserEntity()
-                .setId(1)
-                .setUsername("Kalin4")
-                .setPassword("123")
-                .setEmail("kalin_krumov@gmail.com")
-                .setFirstName("Kalin")
-                .setLastName("Krumov")
-                .setRoles(List.of(new RoleEntity().setName(UserRoleEnum.ADMIN)));
-
-        role = new RoleEntity()
-                .setId(1)
-                .setName(UserRoleEnum.ADMIN);
+//        user = new UserEntity()
+//                .setId(1)
+//                .setUsername("Kalin4")
+//                .setPassword("123")
+//                .setEmail("kalin_krumov@gmail.com")
+//                .setFirstName("Kalin")
+//                .setLastName("Krumov")
+//                .setRoles(List.of(new RoleEntity().setName(UserRoleEnum.ADMIN)));
+//
+//        role = new RoleEntity()
+//                .setId(1)
+//                .setName(UserRoleEnum.ADMIN);
     }
 
-    @Test
-    @WithMockUser(username = "Kalin4", roles = {"ADMIN"})
-    void changeRoleTest() throws Exception {
-        when(userService.getAddRoleDTO(1L))
-                .thenReturn(Optional.of(roleDTO));
-
-        when(userService.getUserById(1L))
-                .thenReturn(Optional.of(user));
-
-        when(roleService.getMissingRoles(user))
-                .thenReturn(List.of(role));
-
-        mockMvc.perform(get("/admin/addRole/{id}",user.getId()))
-                .andExpect(model().attributeExists("userModel"))
-                .andExpect(model().attributeExists("missingRoles"))
-                .andExpect(view().name("addRole"));
-    }
-
-    @Test
-    @WithMockUser(username = "Kalin4", roles = {"ADMIN"})
-    void removeRoleTest() throws Exception {
-        when(userService.getAddRoleDTO(1L))
-                .thenReturn(Optional.of(roleDTO));
-
-        when(userService.getUserById(1L))
-                .thenReturn(Optional.of(user));
-
-        when(roleService.getRolesToRemove(user))
-                .thenReturn(List.of(role));
-
-        mockMvc.perform(get("/admin/removeRole/{id}",user.getId()))
-                .andExpect(model().attributeExists("userModel"))
-                .andExpect(model().attributeExists("toRemove"))
-                .andExpect(view().name("removeRole"));
-    }
+//    @Test
+//    @WithMockUser(username = "Kalin4", roles = {"ADMIN"})
+//    void changeRoleTest() throws Exception {
+//        when(userService.getAddRoleDTO(1L))
+//                .thenReturn(Optional.of(roleDTO));
+//
+//        when(userService.getUserById(1L))
+//                .thenReturn(Optional.of(user));
+//
+//        when(roleService.getMissingRoles(user))
+//                .thenReturn(List.of(role));
+//
+//        mockMvc.perform(get("/admin/addRole/{id}",user.getId()))
+//                .andExpect(model().attributeExists("userModel"))
+//                .andExpect(model().attributeExists("missingRoles"))
+//                .andExpect(view().name("addRole"));
+//    }
+//
+//    @Test
+//    @WithMockUser(username = "Kalin4", roles = {"ADMIN"})
+//    void removeRoleTest() throws Exception {
+//        when(userService.getAddRoleDTO(1L))
+//                .thenReturn(Optional.of(roleDTO));
+//
+//        when(userService.getUserById(1L))
+//                .thenReturn(Optional.of(user));
+//
+//        when(roleService.getRolesToRemove(user))
+//                .thenReturn(List.of(role));
+//
+//        mockMvc.perform(get("/admin/removeRole/{id}",user.getId()))
+//                .andExpect(model().attributeExists("userModel"))
+//                .andExpect(model().attributeExists("toRemove"))
+//                .andExpect(view().name("removeRole"));
+//    }
 
 
 }

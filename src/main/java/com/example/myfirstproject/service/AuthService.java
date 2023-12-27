@@ -29,17 +29,14 @@ public class AuthService {
         if (!userRegisterDTO.getPassword().equals(userRegisterDTO.getConfirmPassword())) {
             return false;
         }
-
         Optional<UserEntity> byUsername = this.userService.getByUsername(userRegisterDTO.getUsername());
         if (byUsername.isPresent()) {
             return false;
         }
-
         Optional<UserEntity> byEmail = this.userService.getByEmail(userRegisterDTO.getEmail());
         if (byEmail.isPresent()) {
             return false;
         }
-
         UserEntity user = this.modelMapper.map(userRegisterDTO, UserEntity.class);
         user.setPassword(passwordEncoder.encode(userRegisterDTO.getPassword()));
         this.userService.register(user);

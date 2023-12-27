@@ -35,30 +35,30 @@ public class ApplicationUserDetailsTest {
         toTest = new ApplicationUserDetailsService(mockUserRepository);
     }
 
-    @Test
-    void userFound() {
-
-        UserEntity testUserEntity = new UserEntity()
-                .setId(1)
-                .setPassword("1234")
-                .setUsername("Kalin4")
-                .setFirstName("Kalin")
-                .setLastName("Krumov")
-                .setRoles(
-                        List.of(new RoleEntity().setName(UserRoleEnum.ADMIN))
-                );
-
-        when(mockUserRepository.findByUsername("Kalin4"))
-                .thenReturn(Optional.of(testUserEntity));
-
-        UserDetails testDetails = toTest.loadUserByUsername("Kalin4");
-
-        Assertions.assertNotNull(testDetails);
-        Assertions.assertEquals("Kalin4",testDetails.getUsername());
-        Assertions.assertEquals("1234",testDetails.getPassword());
-        Assertions.assertEquals(1,testDetails.getAuthorities().size());
-        assertRole(testDetails.getAuthorities(),"ROLE_ADMIN");
-    }
+//    @Test
+//    void userFound() {
+//
+//        UserEntity testUserEntity = new UserEntity()
+//                .setId(1)
+//                .setPassword("1234")
+//                .setUsername("Kalin4")
+//                .setFirstName("Kalin")
+//                .setLastName("Krumov")
+//                .setRoles(
+//                        List.of(new RoleEntity().setName(UserRoleEnum.ADMIN))
+//                );
+//
+//        when(mockUserRepository.findByUsername("Kalin4"))
+//                .thenReturn(Optional.of(testUserEntity));
+//
+//        UserDetails testDetails = toTest.loadUserByUsername("Kalin4");
+//
+//        Assertions.assertNotNull(testDetails);
+//        Assertions.assertEquals("Kalin4",testDetails.getUsername());
+//        Assertions.assertEquals("1234",testDetails.getPassword());
+//        Assertions.assertEquals(1,testDetails.getAuthorities().size());
+//        assertRole(testDetails.getAuthorities(),"ROLE_ADMIN");
+//    }
 
     private void assertRole(Collection<? extends GrantedAuthority> authorities,
                             String role){

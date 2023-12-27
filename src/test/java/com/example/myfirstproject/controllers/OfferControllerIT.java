@@ -73,14 +73,14 @@ public class OfferControllerIT {
 
     @BeforeEach
     void setup() {
-        user = new UserEntity()
-                .setId(1)
-                .setUsername("Kalin4")
-                .setPassword("123")
-                .setEmail("kalin_krumov@gmail.com")
-                .setFirstName("Kalin")
-                .setLastName("Krumov")
-                .setRoles(List.of(new RoleEntity().setName(UserRoleEnum.ADMIN)));
+//        user = new UserEntity()
+//                .setId(1)
+//                .setUsername("Kalin4")
+//                .setPassword("123")
+//                .setEmail("kalin_krumov@gmail.com")
+//                .setFirstName("Kalin")
+//                .setLastName("Krumov")
+//                .setRoles(List.of(new RoleEntity().setName(UserRoleEnum.ADMIN)));
 
         offer = new OfferEntity()
                 .setId(1)

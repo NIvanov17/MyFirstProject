@@ -132,7 +132,7 @@ public class OfferController {
         return "redirect:/liked-offers";
     }
 
-    @GetMapping("/offer/delete/{id}")
+    @GetMapping ("/offer/delete/{id}")
     public String deleteOffer(@PathVariable("id") Long id,
                               Principal principal) {
 

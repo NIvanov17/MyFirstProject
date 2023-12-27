@@ -109,9 +109,9 @@ public class OfferService {
     public void deleteOffer(Long id, Principal principal) {
 
         OfferEntity offer = this.getOfferById(id);
-        UserEntity owner = offer.getSeller();
+        UserEntity seller = offer.getSeller();
 
-        if (!isOwner(id, principal)) {
+        if (!isOwner(id, principal) || !isAdmin(seller)) {
             return;
         }
         userService.disLikeOffer(principal, offer);
